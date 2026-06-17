@@ -19,6 +19,15 @@ func _on_init() -> void:
 	pvai_button.pressed.connect(_on_pvai_pressed)
 	settings_button.pressed.connect(_on_settings_pressed)
 	quit_button.pressed.connect(_on_quit_pressed)
+	EventBus.subscribe(&"LanguageChangedEvent", _on_language_changed)
+	_refresh_texts()
+
+
+func _on_destroy() -> void:
+	EventBus.unsubscribe(&"LanguageChangedEvent", _on_language_changed)
+
+
+func _on_language_changed(_event: Event) -> void:
 	_refresh_texts()
 
 

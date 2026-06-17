@@ -18,6 +18,21 @@ func _on_init() -> void:
 	resume_button.pressed.connect(_on_resume_game)
 	settings_button.pressed.connect(_on_open_settings)
 	menu_button.pressed.connect(_on_back_to_menu)
+	EventBus.subscribe(&"LanguageChangedEvent", _on_language_changed)
+
+
+func _on_destroy() -> void:
+	EventBus.unsubscribe(&"LanguageChangedEvent", _on_language_changed)
+
+
+func _on_language_changed(_event: Event) -> void:
+	_refresh_texts()
+
+
+func _refresh_texts() -> void:
+	resume_button.text = tr("pause.resume")
+	settings_button.text = tr("pause.settings")
+	menu_button.text = tr("pause.quit")
 
 
 func _on_open(_data: Dictionary = {}) -> void:

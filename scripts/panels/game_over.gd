@@ -12,6 +12,15 @@ func _on_init() -> void:
 	UIHelpers.setup_button_animation(menu_button)
 	play_again_button.pressed.connect(_on_play_again)
 	menu_button.pressed.connect(_on_back_to_menu)
+	EventBus.subscribe(&"LanguageChangedEvent", _on_language_changed)
+
+
+func _on_destroy() -> void:
+	EventBus.unsubscribe(&"LanguageChangedEvent", _on_language_changed)
+
+
+func _on_language_changed(_event: Event) -> void:
+	_refresh_texts()
 
 
 func _on_open(_data: Dictionary = {}) -> void:

@@ -12,12 +12,18 @@ func _on_init() -> void:
 	EventBus.subscribe(&"TurnChangedEvent", _on_turn_changed)
 	EventBus.subscribe(&"ScoreChangedEvent", _on_score_changed)
 	EventBus.subscribe(&"GameStartedEvent", _on_game_started)
+	EventBus.subscribe(&"LanguageChangedEvent", _on_language_changed)
 
 
 func _on_destroy() -> void:
 	EventBus.unsubscribe(&"TurnChangedEvent", _on_turn_changed)
 	EventBus.unsubscribe(&"ScoreChangedEvent", _on_score_changed)
 	EventBus.unsubscribe(&"GameStartedEvent", _on_game_started)
+	EventBus.unsubscribe(&"LanguageChangedEvent", _on_language_changed)
+
+
+func _on_language_changed(_event: Event) -> void:
+	_refresh_all()
 
 
 func _on_open(_data: Dictionary = {}) -> void:

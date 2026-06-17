@@ -96,13 +96,14 @@ func _setup_guide_input() -> void:
 		joy_axis, [], [GUIDETriggerDown.new()]))
 	_gameplay_context.mappings.append(stick_mapping)
 
-	# Connect signals
-	_place_mark_action.just_triggered.connect(_on_place_mark)
-	_nav_up_action.just_triggered.connect(func(): _on_nav_discrete(Vector2(0, -1)))
-	_nav_down_action.just_triggered.connect(func(): _on_nav_discrete(Vector2(0, 1)))
-	_nav_left_action.just_triggered.connect(func(): _on_nav_discrete(Vector2(-1, 0)))
-	_nav_right_action.just_triggered.connect(func(): _on_nav_discrete(Vector2(1, 0)))
-	_nav_stick_action.triggered.connect(_on_nav_stick)
+	# Connect signals (with guard against duplicate connections on re-entry)
+	if not _place_mark_action.just_triggered.is_connected(_on_place_mark):
+		_place_mark_action.just_triggered.connect(_on_place_mark)
+		_nav_up_action.just_triggered.connect(func(): _on_nav_discrete(Vector2(0, -1)))
+		_nav_down_action.just_triggered.connect(func(): _on_nav_discrete(Vector2(0, 1)))
+		_nav_left_action.just_triggered.connect(func(): _on_nav_discrete(Vector2(-1, 0)))
+		_nav_right_action.just_triggered.connect(func(): _on_nav_discrete(Vector2(1, 0)))
+		_nav_stick_action.triggered.connect(_on_nav_stick)
 
 	GUIDE.enable_mapping_context(_gameplay_context, false, 0)
 
@@ -277,7 +278,9 @@ func _animate_win_line(win_indices: Array) -> void:
 
 	var win_line := Line2D.new()
 	win_line.name = "WinLine"
-	win_line.default_color = WIN_LINE_COLOR
+	var start_color := WIN_LINE_COLOR
+	start_color.a = 0.0
+	win_line.default_color = start_color
 	win_line.width = 0.0
 	win_line.add_point(start)
 	win_line.add_point(end)
@@ -292,12 +295,12 @@ func _animate_win_line(win_indices: Array) -> void:
 
 
 func _animate_winning_cells(win_indices: Array) -> void:
+	if _pulse_tween:
+		_pulse_tween.kill()
+	_pulse_tween = create_tween().set_parallel(true).set_loops(2)
 	var cells := get_tree().get_nodes_in_group("cell")
 	for idx in win_indices:
 		for c in cells:
 			if c is Cell and c.cell_index == idx and c.highlight:
-				if _pulse_tween:
-					_pulse_tween.kill()
-				_pulse_tween = create_tween().set_parallel(true).set_loops(2)
 				_pulse_tween.tween_property(c.highlight, "modulate:a", 0.6, 0.4).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN_OUT)
 				_pulse_tween.tween_property(c.highlight, "modulate:a", 0.0, 0.4).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN_OUT)
