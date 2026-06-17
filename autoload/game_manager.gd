@@ -256,11 +256,12 @@ func _minimax(is_maximizing: bool, depth: int, alpha: int, beta: int, max_depth:
 		return INF_SCORE - depth if winner == ai_player else depth - INF_SCORE
 	if _is_board_full():
 		return 0
-	if depth >= max_depth:
-		return _evaluate()
 
 	if random_chance > 0.0 and randf() < random_chance:
 		return 0
+
+	if depth >= max_depth:
+		return _evaluate()
 
 	if is_maximizing:
 		var best: int = -INF_SCORE

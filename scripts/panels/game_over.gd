@@ -22,6 +22,7 @@ func _ready() -> void:
 
 
 func _on_destroy() -> void:
+	super._on_destroy()
 	EventBus.unsubscribe(&"LanguageChangedEvent", _on_language_changed)
 
 

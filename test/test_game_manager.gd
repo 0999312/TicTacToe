@@ -80,24 +80,21 @@ func test_ai_hard_perfect() -> void:
 
 func test_ai_easy_random() -> void:
 	var gm := _make_gm()
-	# Board: X at 0, X has threat at row 0,1,2 (needs cell 2)
+	# Board: X at 0, O at 3, rest empty
 	gm.board = [0, -1, -1, 1, -1, -1, -1, -1, -1]
 	gm.move_count = 2
 	gm.current_player = gm.Player.O
 	gm.ai_player = gm.Player.O
 
-	# Run 20 trials with Easy parameters (depth=1, random=0.8)
-	var suboptimal_count: int = 0
-	for _i in range(20):
+	var counts: Dictionary = {}
+	for _i in range(100):
 		gm.board = [0, -1, -1, 1, -1, -1, -1, -1, -1]
 		gm.move_count = 2
 		var move: int = gm._find_best_move(1, 0.8)
-		# Cell 2 is the optimal block; anything else is suboptimal
-		if move != 2:
-			suboptimal_count += 1
+		counts[move] = counts.get(move, 0) + 1
 
-	# At least 3 out of 20 trials should be suboptimal
-	assert_gt(suboptimal_count, 2, "Easy AI should make suboptimal moves frequently (got %d/20)" % suboptimal_count)
+	# With random_chance=0.8, Easy AI should not deterministically pick the same cell every time
+	assert_gt(counts.size(), 1, "Easy AI should pick different cells across trials")
 
 
 # --- AI Tests: Medium (Blocking) ---

@@ -29,7 +29,7 @@ SettingsManager="*res://autoload/settings_manager.gd"
 I18NManager="*uid://wj05s0mpoqn"
 UIManager="*uid://b0mn85k3pon1l"
 GUIDE="*res://addons/guide/guide.gd"
-; AudioController="*res://autoload/audio_controller.gd" — disabled: script references unresolved types (Event, SoundRegistry, ResourceLocation) causing parse errors during autoload init; blocks headless test runner
+AudioController="*res://autoload/audio_controller.gd"
 SoundManager="*uid://bjex7rgsn4fi1"
 
 [display]
