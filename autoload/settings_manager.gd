@@ -26,7 +26,7 @@ func set_value(key: String, value: Variant) -> void:
 
 func save() -> void:
 	for key in _cache.keys():
-		var parts := key.split("/")
+		var parts: PackedStringArray = (key as String).split("/")
 		if parts.size() == 2:
 			_config.set_value(parts[0], parts[1], _cache[key])
 	var err := _config.save(SETTINGS_PATH)
