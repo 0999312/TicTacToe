@@ -17,6 +17,7 @@ const DIFFICULTY_BUTTONS: Array[String] = ["EasyButton", "MediumButton", "HardBu
 
 
 var _initialized: bool = false
+var _return_layer: int = UILayer.NORMAL
 
 
 func _ready() -> void:
@@ -73,6 +74,9 @@ func _on_open(_data: Dictionary = {}) -> void:
 		_:
 			language_option_button.select(0)
 
+	# Store return layer for back navigation
+	_return_layer = _data.get("return_layer", UILayer.NORMAL)
+
 	# Set tab titles from translations
 	tab_container.set_tab_title(0, tr("settings.tab_audio"))
 	tab_container.set_tab_title(1, tr("settings.tab_game"))
@@ -128,4 +132,4 @@ func _on_language_selected(index: int) -> void:
 
 
 func _on_back_pressed() -> void:
-	UIManager.back(UILayer.NORMAL)
+	UIManager.back(_return_layer)

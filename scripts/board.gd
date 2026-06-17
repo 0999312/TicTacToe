@@ -227,6 +227,8 @@ func _on_game_started(_event: Event) -> void:
 			child.queue_free()
 	if not _gameplay_context:
 		_setup_guide_input()
+	else:
+		GUIDE.enable_mapping_context(_gameplay_context, false, 0)
 
 
 func _on_game_won(event: Event) -> void:

@@ -83,7 +83,7 @@ func _on_esc_pressed() -> void:
 
 
 func _on_open_settings() -> void:
-	UIManager.open_panel(ResourceLocation.from_string("tic_tac_toe:settings"))
+	UIManager.open_panel(ResourceLocation.from_string("tic_tac_toe:settings"), {"return_layer": UILayer.POPUP}, UILayer.POPUP)
 
 
 func _on_back_to_menu() -> void:
