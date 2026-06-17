@@ -10,7 +10,7 @@ This is a brownfield polish phase for an already-functional Tic-Tac-Toe game bui
 
 ## Phases
 
-- [ ] **Phase 0: Foundation, Sound & Localization** (1/3 plans complete) - Stable infrastructure, audio feedback, and bilingual support
+- [x] **Phase 0: Foundation, Sound & Localization** (1/3 plans complete) - Stable infrastructure, audio feedback, and bilingual support (completed 2026-06-17)
 - [ ] **Phase 1: UI & Animations** - Polished navigation flow and visual animations
 - [ ] **Phase 2: AI** - Minimax upgrade with three difficulty tiers
 
@@ -33,7 +33,7 @@ This is a brownfield polish phase for an already-functional Tic-Tac-Toe game bui
 **Mode**: mvp
 **Plans:**
 
-2/3 plans executed
+3/3 plans complete
 
 - [ ] `00-02-PLAN.md` — Audio system (AudioController, SoundRegistry, SFX/Music buses, kenney sounds, music crossfade) + MiSans-Semibold theme resource
 - [ ] `00-03-PLAN.md` — Bilingual localization (zh_CN/en_US JSON translation files, tr() adoption in all UI text, LanguageChangedEvent subscription, locale restore)
@@ -74,6 +74,6 @@ This is a brownfield polish phase for an already-functional Tic-Tac-Toe game bui
 
 | Phase | Plans Complete | Status | Completed |
 |-------|----------------|--------|-----------|
-| 0. Foundation, Sound & Localization | 2/3 | In Progress|  |
+| 0. Foundation, Sound & Localization | 3/3 | Complete   | 2026-06-17 |
 | 1. UI & Animations | 0/0 | Not started | - |
 | 2. AI | 0/0 | Not started | - |
