@@ -23,11 +23,13 @@ var draw_score: int = 0
 var ai_timer: Timer
 var cursor_index: int = 4
 
+
 func _ready() -> void:
 	ai_timer = Timer.new()
 	ai_timer.one_shot = true
 	ai_timer.timeout.connect(_do_ai_move)
 	add_child(ai_timer)
+	EventBus.subscribe(&"RematchEvent", _on_rematch)
 	_init_board()
 
 
@@ -41,6 +43,10 @@ func _init_board() -> void:
 
 
 func start_game(p_mode: GameMode, p_player_side: Player = Player.X) -> void:
+	if p_mode != GameMode.PVP and p_mode != GameMode.PVAI:
+		push_warning("GameManager.start_game: invalid mode %d" % p_mode)
+	if p_player_side != Player.X and p_player_side != Player.O:
+		push_warning("GameManager.start_game: invalid player_side %d" % p_player_side)
 	mode = p_mode
 	player_side = p_player_side
 	if mode == GameMode.PVAI:
@@ -65,9 +71,10 @@ func reset_board() -> void:
 
 
 func place_mark(cell_index: int) -> bool:
-	if state != GameState.PLAYING:
-		return false
 	if cell_index < 0 or cell_index > 8:
+		push_warning("GameManager.place_mark: cell_index %d out of range [0-8]" % cell_index)
+		return false
+	if state != GameState.PLAYING:
 		return false
 	if board[cell_index] != -1:
 		return false
@@ -103,6 +110,9 @@ func place_mark(cell_index: int) -> bool:
 
 
 func move_cursor(direction: Vector2) -> void:
+	if direction == Vector2.ZERO:
+		push_warning("GameManager.move_cursor: direction is zero vector")
+		return
 	if state != GameState.PLAYING:
 		return
 	@warning_ignore("integer_division")
@@ -205,3 +215,10 @@ func _minimax(is_maximizing: bool, depth: int) -> int:
 				best = min(best, _minimax(true, depth + 1))
 				board[i] = -1
 		return int(best)
+
+
+# --- EventBus handlers ---
+
+func _on_rematch(_event: Event) -> void:
+	# Handles RematchEvent: reset board for a new game
+	reset_board()

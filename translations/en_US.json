@@ -4,19 +4,28 @@
     "pvp": "Player vs Player",
     "pvai_x": "Player vs AI - First",
     "pvai_o": "Player vs AI - Second",
-    "score": "X Wins: {0}  |  O Wins: {1}  |  Draws: {2}"
+    "score": "X Wins: {0}  |  O Wins: {1}  |  Draws: {2}",
+    "settings": "Settings",
+    "quit": "Quit",
+    "version": "v0.1.0",
+    "subtitle": "Tic-Tac-Toe"
   },
   "hud": {
     "mode_pvp": "Player vs Player",
     "mode_pvai": "Player vs AI",
     "turn": "Turn: {0}",
-    "back": "Back to Menu"
+    "back": "Back to Menu",
+    "x_wins": "X Wins: {0}",
+    "o_wins": "O Wins: {0}",
+    "draws": "Draws: {0}"
   },
   "game_over": {
     "win": "{0} Wins!",
     "draw": "Draw!",
     "rematch": "Play Again",
-    "back": "Back to Menu"
+    "back": "Back to Menu",
+    "score_recap": "X {0} / O {1} / Draw {2}",
+    "play_again": "Play Again"
   },
   "settings": {
     "title": "Settings",
@@ -26,6 +35,18 @@
     "language": "Language",
     "easy": "Easy",
     "medium": "Medium",
-    "hard": "Hard"
+    "hard": "Hard",
+    "tab_audio": "Audio",
+    "tab_game": "Game",
+    "tab_language": "Language"
+  },
+  "pause": {
+    "title": "Paused",
+    "resume": "Resume",
+    "settings": "Settings",
+    "quit": "Back to Menu"
+  },
+  "common": {
+    "back": "Back"
   }
 }

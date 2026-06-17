@@ -1,0 +1,21 @@
+[gd_scene load_steps=4 format=3]
+
+[ext_resource type="Script" path="res://scripts/cell.gd" id="1_script"]
+[ext_resource type="Texture2D" path="res://assets/sprites/highlight_square.svg" id="2_highlight"]
+
+[sub_resource type="RectangleShape2D" id="1_shape"]
+size = Vector2(160, 160)
+
+[node name="Cell" type="Area2D" groups=["cell"]]
+script = ExtResource("1_script")
+cell_index = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("1_shape")
+
+[node name="Highlight" type="Sprite2D" parent="."]
+texture = ExtResource("2_highlight")
+modulate = Color(1, 1, 1, 0.25)
+visible = false
+
+[node name="Sprite2D" type="Sprite2D" parent="."]

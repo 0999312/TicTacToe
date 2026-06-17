@@ -1,0 +1,63 @@
+[gd_scene load_steps=3 format=3]
+
+[ext_resource type="Script" path="res://scripts/board.gd" id="1_board"]
+[ext_resource type="PackedScene" path="res://scenes/cell.tscn" id="2_cell"]
+
+[node name="Board" type="Node2D"]
+script = ExtResource("1_board")
+
+[node name="GridLineH1" type="Line2D" parent="."]
+points = PackedVector2Array(110, 260, 610, 260)
+width = 4.0
+default_color = Color(0.7, 0.7, 0.7, 1)
+
+[node name="GridLineH2" type="Line2D" parent="."]
+points = PackedVector2Array(110, 460, 610, 460)
+width = 4.0
+default_color = Color(0.7, 0.7, 0.7, 1)
+
+[node name="GridLineV1" type="Line2D" parent="."]
+points = PackedVector2Array(260, 110, 260, 610)
+width = 4.0
+default_color = Color(0.7, 0.7, 0.7, 1)
+
+[node name="GridLineV2" type="Line2D" parent="."]
+points = PackedVector2Array(460, 110, 460, 610)
+width = 4.0
+default_color = Color(0.7, 0.7, 0.7, 1)
+
+[node name="Cell0" parent="." instance=ExtResource("2_cell")]
+position = Vector2(160, 160)
+cell_index = 0
+
+[node name="Cell1" parent="." instance=ExtResource("2_cell")]
+position = Vector2(360, 160)
+cell_index = 1
+
+[node name="Cell2" parent="." instance=ExtResource("2_cell")]
+position = Vector2(560, 160)
+cell_index = 2
+
+[node name="Cell3" parent="." instance=ExtResource("2_cell")]
+position = Vector2(160, 360)
+cell_index = 3
+
+[node name="Cell4" parent="." instance=ExtResource("2_cell")]
+position = Vector2(360, 360)
+cell_index = 4
+
+[node name="Cell5" parent="." instance=ExtResource("2_cell")]
+position = Vector2(560, 360)
+cell_index = 5
+
+[node name="Cell6" parent="." instance=ExtResource("2_cell")]
+position = Vector2(160, 560)
+cell_index = 6
+
+[node name="Cell7" parent="." instance=ExtResource("2_cell")]
+position = Vector2(360, 560)
+cell_index = 7
+
+[node name="Cell8" parent="." instance=ExtResource("2_cell")]
+position = Vector2(560, 560)
+cell_index = 8

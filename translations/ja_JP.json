@@ -1,0 +1,52 @@
+{
+  "main_menu": {
+    "title": "ティック・タック・トー",
+    "pvp": "二人対戦",
+    "pvai_x": "対AI - 先手",
+    "pvai_o": "対AI - 後手",
+    "score": "Xの勝ち: {0}  |  Oの勝ち: {1}  |  引き分け: {2}",
+    "settings": "設定",
+    "quit": "終了",
+    "version": "v0.1.0",
+    "subtitle": "Tic-Tac-Toe"
+  },
+  "hud": {
+    "mode_pvp": "二人対戦",
+    "mode_pvai": "対AI",
+    "turn": "手番: {0}",
+    "back": "メニューに戻る",
+    "x_wins": "Xの勝ち: {0}",
+    "o_wins": "Oの勝ち: {0}",
+    "draws": "引き分け: {0}"
+  },
+  "game_over": {
+    "win": "{0} の勝ち!",
+    "draw": "引き分け!",
+    "rematch": "もう一度",
+    "back": "メニューに戻る",
+    "score_recap": "X {0} / O {1} / 引分 {2}",
+    "play_again": "もう一度"
+  },
+  "settings": {
+    "title": "設定",
+    "sfx_volume": "効果音音量",
+    "music_volume": "音楽音量",
+    "difficulty": "難易度",
+    "language": "言語",
+    "easy": "簡単",
+    "medium": "普通",
+    "hard": "難しい",
+    "tab_audio": "オーディオ",
+    "tab_game": "ゲーム",
+    "tab_language": "言語"
+  },
+  "pause": {
+    "title": "一時停止",
+    "resume": "再開",
+    "settings": "設定",
+    "quit": "メニューに戻る"
+  },
+  "common": {
+    "back": "戻る"
+  }
+}
