@@ -9,10 +9,10 @@ Requirements for the polish milestone. Each maps to roadmap phases.
 
 ### Foundation
 
-- [ ] **FND-01**: EventBus script path use StringName constants to replace hardcoded strings
+- [x] **FND-01**: EventBus script path use StringName constants to replace hardcoded strings
 - [ ] **FND-02**: Remove SoundManager double registration, verify singleton correctness
 - [ ] **FND-03**: Create AudioBusLayout (SFX / Music / UI three buses)
-- [ ] **FND-04**: Add `push_error`/`push_warning` error handling to project code
+- [x] **FND-04**: Add `push_error`/`push_warning` error handling to project code
 
 ### UI
 
@@ -52,10 +52,10 @@ Requirements for the polish milestone. Each maps to roadmap phases.
 
 ### Code Quality
 
-- [ ] **CQ-01**: Eliminate all `preload("res://...")` hardcoded paths, use `@export` or constants
+- [x] **CQ-01**: Eliminate EventBus hardcoded script path strings, use StringName constants
 - [ ] **CQ-02**: Add parameter validation and `push_warning` to all GameManager public methods
 - [ ] **CQ-03**: Extract duplicate code to shared helper functions
-- [ ] **CQ-04**: Settings persistence -- ConfigFile save/load for volume, difficulty, language
+- [x] **CQ-04**: Settings persistence -- ConfigFile save/load for volume, difficulty, language
 
 ## v2 Requirements
 
@@ -85,12 +85,12 @@ Which phases cover which requirements. Updated during roadmap creation.
 
 | Requirement | Phase | Status |
 |-------------|-------|--------|
-| FND-01 | Phase 0 | Pending |
+| FND-01 | Phase 0 | Complete (00-01) |
 | FND-02 | Phase 0 | Pending |
 | FND-03 | Phase 0 | Pending |
-| FND-04 | Phase 0 | Pending |
-| CQ-01 | Phase 0 | Pending |
-| CQ-04 | Phase 0 | Pending |
+| FND-04 | Phase 0 | Complete (00-01) |
+| CQ-01 | Phase 0 | Complete (00-01) |
+| CQ-04 | Phase 0 | Complete (00-01) |
 | SND-01 | Phase 0 | Pending |
 | SND-02 | Phase 0 | Pending |
 | SND-03 | Phase 0 | Pending |
