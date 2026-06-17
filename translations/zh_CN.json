@@ -17,7 +17,8 @@
     "back": "返回主菜单",
     "x_wins": "X胜: {0}",
     "o_wins": "O胜: {0}",
-    "draws": "平局: {0}"
+    "draws": "平局: {0}",
+    "ai_thinking": "AI 思考中..."
   },
   "game_over": {
     "win": "{0} 获胜!",

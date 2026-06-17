@@ -17,7 +17,8 @@
     "back": "Back to Menu",
     "x_wins": "X Wins: {0}",
     "o_wins": "O Wins: {0}",
-    "draws": "Draws: {0}"
+    "draws": "Draws: {0}",
+    "ai_thinking": "AI thinking..."
   },
   "game_over": {
     "win": "{0} Wins!",

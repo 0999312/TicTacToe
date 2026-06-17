@@ -51,6 +51,14 @@ text = "hud.turn"
 horizontal_alignment = 1
 theme_override_font_sizes/font_size = 32
 
+[node name="ThinkingLabel" type="Label" parent="VBoxContainer/HBoxContainer/CenterVBox"]
+layout_mode = 2
+text = "hud.ai_thinking"
+horizontal_alignment = 1
+theme_override_font_sizes/font_size = 14
+modulate = Color(0.91, 0.72, 0.29, 1)
+visible = false
+
 [node name="RightVBox" type="VBoxContainer" parent="VBoxContainer/HBoxContainer"]
 layout_mode = 2
 

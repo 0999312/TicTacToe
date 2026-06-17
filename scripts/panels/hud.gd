@@ -3,6 +3,7 @@ extends UIPanel
 
 @onready var mode_label: Label = $VBoxContainer/ModeLabel
 @onready var turn_label: Label = $VBoxContainer/HBoxContainer/CenterVBox/TurnLabel
+@onready var thinking_label: Label = $VBoxContainer/HBoxContainer/CenterVBox/ThinkingLabel
 @onready var x_wins_label: Label = $VBoxContainer/HBoxContainer/LeftVBox/XWinsLabel
 @onready var o_wins_label: Label = $VBoxContainer/HBoxContainer/RightVBox/OWinsLabel
 @onready var draws_label: Label = $VBoxContainer/HBoxContainer/RightVBox/DrawsLabel
@@ -19,6 +20,7 @@ func _ready() -> void:
 	EventBus.subscribe(&"ScoreChangedEvent", _on_score_changed)
 	EventBus.subscribe(&"GameStartedEvent", _on_game_started)
 	EventBus.subscribe(&"LanguageChangedEvent", _on_language_changed)
+	EventBus.subscribe(&"AiThinkingEvent", _on_ai_thinking)
 
 
 func _on_destroy() -> void:
@@ -26,6 +28,7 @@ func _on_destroy() -> void:
 	EventBus.unsubscribe(&"ScoreChangedEvent", _on_score_changed)
 	EventBus.unsubscribe(&"GameStartedEvent", _on_game_started)
 	EventBus.unsubscribe(&"LanguageChangedEvent", _on_language_changed)
+	EventBus.unsubscribe(&"AiThinkingEvent", _on_ai_thinking)
 
 
 func _on_language_changed(_event: Event) -> void:
@@ -73,3 +76,8 @@ func _on_game_started(event: Event) -> void:
 	var mode_val: int = event.get("mode")
 	var mode_text := tr("hud.mode_pvp") if mode_val == GameManager.GameMode.PVP else tr("hud.mode_pvai")
 	mode_label.text = mode_text
+
+
+func _on_ai_thinking(event: Event) -> void:
+	var is_thinking: bool = event.get("thinking")
+	thinking_label.visible = is_thinking
