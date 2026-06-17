@@ -5,7 +5,7 @@ milestone_name: milestone
 status: complete
 stopped_at: Phase 2 complete (all gaps closed)
 last_updated: "2026-06-17T16:00:00Z"
-last_activity: 2026-06-17 -- Completed quick task 260617-tpp: AI-02 CR-01 gap closure
+last_activity: 2026-06-17 -- Completed quick task 260617-tt4: SND-02 button sounds wired to UIHelpers
 progress:
   total_phases: 3
   completed_phases: 3
@@ -84,6 +84,7 @@ None yet.
 | # | Description | Date | Commit | Directory |
 |---|-------------|------|--------|-----------|
 | 260617-tpp | 修复 AI-02 CR-01：Easy 难度 random_chance 从未生效 | 2026-06-17 | d789170 | [260617-tpp-ai-02-cr-01-easy-random-chance](./quick/260617-tpp-ai-02-cr-01-easy-random-chance/) |
+| 260617-tt4 | 修复 SND-02：按钮音效未连接到 UIHelpers | 2026-06-17 | bc4f6e0 | [260617-tt4-snd-02-uihelpers](./quick/260617-tt4-snd-02-uihelpers/) |
 
 ## Deferred Items
 
