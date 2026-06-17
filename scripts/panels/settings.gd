@@ -12,12 +12,17 @@ extends UIPanel
 @onready var hard_button: Button = $VBoxContainer/TabContainer/GameTab/GameVBox/DifficultyRow/HardButton
 @onready var language_option_button: OptionButton = $VBoxContainer/TabContainer/LanguageTab/LangVBox/LanguageOptionButton
 
-const UIHelpers := preload("res://scripts/utils/ui_helpers.gd")
 const ACCENT_COLOR: Color = Color(0.91, 0.72, 0.29, 1)
 const DIFFICULTY_BUTTONS: Array[String] = ["EasyButton", "MediumButton", "HardButton"]
 
 
-func _on_init() -> void:
+var _initialized: bool = false
+
+
+func _ready() -> void:
+	if _initialized:
+		return
+	_initialized = true
 	# Button animations
 	UIHelpers.setup_button_animation(back_button)
 	UIHelpers.setup_button_animation(easy_button)

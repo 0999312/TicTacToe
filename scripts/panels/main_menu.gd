@@ -10,7 +10,13 @@ extends UIPanel
 @onready var version_label: Label = $VBoxContainer/VersionLabel
 
 
-func _on_init() -> void:
+var _initialized: bool = false
+
+
+func _ready() -> void:
+	if _initialized:
+		return
+	_initialized = true
 	UIHelpers.setup_button_animation(pvp_button)
 	UIHelpers.setup_button_animation(pvai_button)
 	UIHelpers.setup_button_animation(settings_button)

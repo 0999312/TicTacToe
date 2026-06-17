@@ -244,7 +244,6 @@ func _on_game_resumed(_event: Event) -> void:
 
 
 func _get_win_line_indices(winner: int) -> Array:
-	var cells := get_tree().get_nodes_in_group("cell")
 	for line in GameManager.WIN_LINES:
 		var a: int = GameManager.get_cell(line[0])
 		var b: int = GameManager.get_cell(line[1])

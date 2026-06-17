@@ -7,7 +7,13 @@ extends UIPanel
 @onready var menu_button: Button = $VBoxContainer/HBoxContainer/MenuButton
 
 
-func _on_init() -> void:
+var _initialized: bool = false
+
+
+func _ready() -> void:
+	if _initialized:
+		return
+	_initialized = true
 	UIHelpers.setup_button_animation(play_again_button)
 	UIHelpers.setup_button_animation(menu_button)
 	play_again_button.pressed.connect(_on_play_again)

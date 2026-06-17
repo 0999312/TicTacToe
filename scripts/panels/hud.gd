@@ -8,7 +8,13 @@ extends UIPanel
 @onready var draws_label: Label = $VBoxContainer/HBoxContainer/RightVBox/DrawsLabel
 
 
-func _on_init() -> void:
+var _initialized: bool = false
+
+
+func _ready() -> void:
+	if _initialized:
+		return
+	_initialized = true
 	EventBus.subscribe(&"TurnChangedEvent", _on_turn_changed)
 	EventBus.subscribe(&"ScoreChangedEvent", _on_score_changed)
 	EventBus.subscribe(&"GameStartedEvent", _on_game_started)

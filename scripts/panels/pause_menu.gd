@@ -5,13 +5,17 @@ extends UIPanel
 @onready var settings_button: Button = $VBoxContainer/SettingsButton
 @onready var menu_button: Button = $VBoxContainer/MenuButton
 
-const UIHelpers := preload("res://scripts/utils/ui_helpers.gd")
-
 var _pause_context: GUIDEMappingContext
 var _prev_music_volume: float = 0.0
 
 
-func _on_init() -> void:
+var _initialized: bool = false
+
+
+func _ready() -> void:
+	if _initialized:
+		return
+	_initialized = true
 	UIHelpers.setup_button_animation(resume_button)
 	UIHelpers.setup_button_animation(settings_button)
 	UIHelpers.setup_button_animation(menu_button)
