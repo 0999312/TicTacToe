@@ -105,6 +105,15 @@ func _setup_guide_input() -> void:
 		_nav_right_action.just_triggered.connect(func(): _on_nav_discrete(Vector2(1, 0)))
 		_nav_stick_action.triggered.connect(_on_nav_stick)
 
+		# Esc -> open PauseMenu
+		var esc_action := GUIDEAction.new()
+		var esc_mapping := GUIDEActionMapping.new()
+		esc_mapping.action = esc_action
+		esc_mapping.input_mappings.append(_make_input_mapping(
+			_make_key(KEY_ESCAPE), [], [GUIDETriggerPressed.new()]))
+		_gameplay_context.mappings.append(esc_mapping)
+		esc_action.just_triggered.connect(_on_esc_pressed)
+
 	GUIDE.enable_mapping_context(_gameplay_context, false, 0)
 
 
@@ -227,6 +236,12 @@ func _on_game_won(event: Event) -> void:
 		_animate_win_line(win_indices)
 		_animate_winning_cells(win_indices)
 	# Keep GUIDE context active so player can see the line, then dismiss on next game start
+
+
+func _on_esc_pressed() -> void:
+	if GameManager.state != GameManager.GameState.PLAYING:
+		return
+	UIManager.open_panel(ResourceLocation.from_string("tic_tac_toe:pause_menu"), {}, UILayer.POPUP)
 
 
 func _on_game_over(_event: Event) -> void:

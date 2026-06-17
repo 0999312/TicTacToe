@@ -3,6 +3,12 @@ class_name UIHelpers
 
 
 static func setup_button_animation(button: Button) -> void:
+	# Set pivot to center so scale transforms from the button's center
+	button.pivot_offset = button.size / 2.0
+	button.resized.connect(func():
+		button.pivot_offset = button.size / 2.0
+	)
+
 	button.mouse_entered.connect(func():
 		if button.has_meta(&"hover_tween"):
 			var prev: Tween = button.get_meta(&"hover_tween") as Tween
