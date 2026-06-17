@@ -79,6 +79,12 @@ None yet.
 
 None yet.
 
+Items acknowledged and deferred at milestone close on 2026-06-17:
+
+| Category | Item | Status |
+|----------|------|--------|
+| uat | 00-UAT test 5 (Settings Persist) | skipped — settings panel UI built in Phase 1 |
+
 ### Quick Tasks Completed
 
 | # | Description | Date | Commit | Directory |
