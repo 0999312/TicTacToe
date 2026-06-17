@@ -1,0 +1,96 @@
+[gd_scene load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://scripts/panels/main_menu.gd" id="1_script"]
+
+[node name="MainMenu" type="Control"]
+script = ExtResource("1_script")
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Background" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.08, 0.08, 0.12, 1)
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -150.0
+offset_top = -200.0
+offset_right = 150.0
+offset_bottom = 200.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 10
+
+[node name="TitleLabel" type="Label" parent="VBoxContainer"]
+layout_mode = 2
+text = "main_menu.title"
+horizontal_alignment = 1
+theme_override_font_sizes/font_size = 48
+
+[node name="Spacer1" type="Control" parent="VBoxContainer"]
+layout_mode = 2
+custom_minimum_size = Vector2(0, 20)
+
+[node name="SubtitleLabel" type="Label" parent="VBoxContainer"]
+layout_mode = 2
+text = "main_menu.subtitle"
+horizontal_alignment = 1
+theme_override_font_sizes/font_size = 20
+modulate = Color(0.60, 0.60, 0.70, 1)
+
+[node name="Spacer2" type="Control" parent="VBoxContainer"]
+layout_mode = 2
+custom_minimum_size = Vector2(0, 32)
+
+[node name="PvPButton" type="Button" parent="VBoxContainer"]
+layout_mode = 2
+text = "main_menu.pvp"
+theme_override_font_sizes/font_size = 20
+custom_minimum_size = Vector2(260, 48)
+
+[node name="PvAIButton" type="Button" parent="VBoxContainer"]
+layout_mode = 2
+text = "main_menu.pvai_x"
+theme_override_font_sizes/font_size = 20
+custom_minimum_size = Vector2(260, 48)
+
+[node name="Spacer3" type="Control" parent="VBoxContainer"]
+layout_mode = 2
+custom_minimum_size = Vector2(0, 16)
+
+[node name="SettingsButton" type="Button" parent="VBoxContainer"]
+layout_mode = 2
+text = "main_menu.settings"
+theme_override_font_sizes/font_size = 20
+custom_minimum_size = Vector2(260, 48)
+
+[node name="QuitButton" type="Button" parent="VBoxContainer"]
+layout_mode = 2
+text = "main_menu.quit"
+theme_override_font_sizes/font_size = 20
+custom_minimum_size = Vector2(260, 48)
+
+[node name="Spacer4" type="Control" parent="VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="VersionLabel" type="Label" parent="VBoxContainer"]
+layout_mode = 2
+text = "main_menu.version"
+horizontal_alignment = 1
+theme_override_font_sizes/font_size = 16
+modulate = Color(0.60, 0.60, 0.70, 1)
