@@ -12,7 +12,7 @@ This is a brownfield polish phase for an already-functional Tic-Tac-Toe game bui
 
 - [x] **Phase 0: Foundation, Sound & Localization** (3/3 plans complete) - Stable infrastructure, audio feedback, and bilingual support (completed 2026-06-17)
 - [x] **Phase 1: UI & Animations** - Polished navigation flow and visual animations (completed 2026-06-17)
-- [ ] **Phase 2: AI** - Minimax upgrade with three difficulty tiers
+- [x] **Phase 2: AI** - Minimax upgrade with three difficulty tiers (completed 2026-06-17)
 
 ## Phase Details
 
@@ -82,4 +82,4 @@ Plans:
 |-------|----------------|--------|-----------|
 | 0. Foundation, Sound & Localization | 3/3 | Complete    | 2026-06-17 |
 | 1. UI & Animations | 2/2 | Complete    | 2026-06-17 |
-| 2. AI | 0/1 | Not started | - |
+| 2. AI | 1/1 | Complete   | 2026-06-17 |
