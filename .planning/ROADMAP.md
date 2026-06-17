@@ -71,8 +71,10 @@ Plans:
   3. AI shows thinking delays appropriate to difficulty level (Easy 0.5-1.0s, Medium 0.3-0.6s, Hard 0.2-0.4s) -- not instant placement
   4. AI difficulty selection persists across sessions via ConfigFile (settings from Phase 0)
 
-**Plans**: TBD
-**Mode**: mvp
+**Plans**: 1 plan
+**Mode**: mvpPlans:
+
+- [ ] `02-01-PLAN.md` — Full AI upgrade: alpha-beta minimax, three-tier difficulty (Easy/Medium/Hard), randomized thinking delays, AiThinkingEvent, HUD thinking indicator, bilingual support
 
 ## Progress
 
@@ -80,4 +82,4 @@ Plans:
 |-------|----------------|--------|-----------|
 | 0. Foundation, Sound & Localization | 3/3 | Complete    | 2026-06-17 |
 | 1. UI & Animations | 2/2 | Complete    | 2026-06-17 |
-| 2. AI | 0/0 | Not started | - |
+| 2. AI | 0/1 | Not started | - |
