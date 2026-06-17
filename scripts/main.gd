@@ -3,10 +3,17 @@ extends Node2D
 @onready var main_menu: Control = $CanvasLayer/MainMenu
 @onready var hud: Control = $CanvasLayer/HUD
 @onready var game_over_panel: Control = $CanvasLayer/GameOverPanel
-@onready var result_label: Label = $CanvasLayer/GameOverPanel/VBoxContainer/ResultLabel
-@onready var turn_label: Label = $CanvasLayer/HUD/VBoxContainer/TurnLabel
-@onready var mode_label: Label = $CanvasLayer/HUD/VBoxContainer/ModeLabel
+@onready var title_label: Label = $CanvasLayer/MainMenu/VBoxContainer/TitleLabel
+@onready var pvp_button: Button = $CanvasLayer/MainMenu/VBoxContainer/PvPButton
+@onready var pvai_x_button: Button = $CanvasLayer/MainMenu/VBoxContainer/PvAIXButton
+@onready var pvai_o_button: Button = $CanvasLayer/MainMenu/VBoxContainer/PvAIOButton
 @onready var score_label: Label = $CanvasLayer/MainMenu/VBoxContainer/ScoreLabel
+@onready var mode_label: Label = $CanvasLayer/HUD/VBoxContainer/ModeLabel
+@onready var turn_label: Label = $CanvasLayer/HUD/VBoxContainer/TurnLabel
+@onready var hud_back_button: Button = $CanvasLayer/HUD/VBoxContainer/BackButton
+@onready var result_label: Label = $CanvasLayer/GameOverPanel/VBoxContainer/ResultLabel
+@onready var rematch_button: Button = $CanvasLayer/GameOverPanel/VBoxContainer/HBoxContainer/RematchButton
+@onready var menu_button: Button = $CanvasLayer/GameOverPanel/VBoxContainer/HBoxContainer/MenuButton
 
 var _gameplay_context: GUIDEMappingContext
 var _place_mark_action: GUIDEAction
@@ -32,6 +39,7 @@ func _ready() -> void:
 	I18NManager.load_translation("en_US", "res://translations/en_US.json")
 	var saved_locale := SettingsManager.get_value("language/locale", "zh_CN") as String
 	I18NManager.set_language(saved_locale)
+	_refresh_all_text()
 
 
 func _setup_guide_input() -> void:
@@ -262,16 +270,25 @@ func _on_score_changed(event: Event) -> void:
 
 
 func _on_language_changed(_event: Event) -> void:
-	_refresh_text()
+	_refresh_all_text()
 
 
-func _refresh_text() -> void:
-	# Update all dynamic text elements
-	if GameManager.state == GameManager.GameState.PLAYING or GameManager.state == GameManager.GameState.OVER:
-		var mode_key := "hud.mode_pvp" if GameManager.mode == GameManager.GameMode.PVP else "hud.mode_pvai"
-		mode_label.text = tr(mode_key)
-		turn_label.text = tr("hud.turn").format([GameManager.get_current_player_text()])
+func _refresh_all_text() -> void:
+	# Main menu — static labels and buttons
+	title_label.text = tr("main_menu.title")
+	pvp_button.text = tr("main_menu.pvp")
+	pvai_x_button.text = tr("main_menu.pvai_x")
+	pvai_o_button.text = tr("main_menu.pvai_o")
+	# Score (shows current scores, defaults to 0)
 	score_label.text = tr("main_menu.score").format([GameManager.player1_score, GameManager.player2_score, GameManager.draw_score])
+	# HUD
+	mode_label.text = tr("hud.mode_pvp") if GameManager.mode == GameManager.GameMode.PVP else tr("hud.mode_pvai")
+	turn_label.text = tr("hud.turn")
+	hud_back_button.text = tr("hud.back")
+	# Game over panel
+	result_label.text = tr("game_over.win")
+	rematch_button.text = tr("game_over.rematch")
+	menu_button.text = tr("game_over.back")
 
 
 # --- helpers ---
