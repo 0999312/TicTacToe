@@ -21,6 +21,8 @@ func _ready() -> void:
 	EventBus.subscribe(&"CursorMovedEvent", _on_cursor_moved)
 	if highlight:
 		highlight.visible = false
+	mouse_entered.connect(_on_mouse_entered)
+	input_event.connect(_on_input_event)
 
 
 func _exit_tree() -> void:
@@ -76,11 +78,31 @@ func _on_game_started(_event: Event) -> void:
 	refresh()
 	enable()
 	set_highlight(false)
+	if highlight:
+		highlight.modulate.a = 1.0
 	sprite.scale = Vector2(1.0, 1.0)
 
 
 func _on_game_over(_event: Event) -> void:
 	disable()
+
+
+func _on_mouse_entered() -> void:
+	if GameManager.state != GameManager.GameState.PLAYING:
+		return
+	GameManager.cursor_index = cell_index
+	EventBus.publish(CursorMovedEvent.new(cell_index))
+
+
+func _on_input_event(_viewport: Node, event: InputEvent, _shape_idx: int) -> void:
+	if not (event is InputEventMouseButton):
+		return
+	var mb := event as InputEventMouseButton
+	if not mb.pressed or mb.button_index != MOUSE_BUTTON_LEFT:
+		return
+	if GameManager.state != GameManager.GameState.PLAYING:
+		return
+	GameManager.place_mark(cell_index)
 
 
 func _on_cursor_moved(event: Event) -> void:
