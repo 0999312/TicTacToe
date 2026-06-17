@@ -39,7 +39,7 @@ func _ready() -> void:
 	I18NManager.load_translation("en_US", "res://translations/en_US.json")
 	var saved_locale := SettingsManager.get_value("language/locale", "zh_CN") as String
 	I18NManager.set_language(saved_locale)
-	_refresh_all_text()
+	call_deferred("_refresh_all_text")
 
 
 func _setup_guide_input() -> void:
@@ -274,6 +274,8 @@ func _on_language_changed(_event: Event) -> void:
 
 
 func _refresh_all_text() -> void:
+	print("_refresh_all_text: tr(main_menu.title)=", tr("main_menu.title"))
+	print("_refresh_all_text: locale=", TranslationServer.get_locale())
 	# Main menu — static labels and buttons
 	title_label.text = tr("main_menu.title")
 	pvp_button.text = tr("main_menu.pvp")
