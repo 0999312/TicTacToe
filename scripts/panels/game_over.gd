@@ -47,9 +47,5 @@ func _on_play_again() -> void:
 
 
 func _on_back_to_menu() -> void:
-	UIManager.close_all(UILayer.NORMAL)
+	EventBus.publish(NavigateToMenuEvent.new())
 	UIManager.back(UILayer.POPUP)
-	var board := get_tree().root.find_child("Board", true, false)
-	if board:
-		board.queue_free()
-	UIManager.open_panel(ResourceLocation.from_string("tic_tac_toe:main_menu"))

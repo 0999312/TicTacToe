@@ -45,8 +45,7 @@ func _on_pvai_pressed() -> void:
 
 
 func _on_settings_pressed() -> void:
-	# Settings panel will be implemented in Plan 01-02
-	pass
+	UIManager.open_panel(ResourceLocation.from_string("tic_tac_toe:settings"))
 
 
 func _on_quit_pressed() -> void:

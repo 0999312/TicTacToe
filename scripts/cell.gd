@@ -5,6 +5,7 @@ class_name Cell
 @onready var sprite: Sprite2D = $Sprite2D
 @onready var highlight: Sprite2D = $Highlight
 
+var _place_tween: Tween
 var _x_texture: Texture2D = preload("res://assets/sprites/x_mark.svg")
 var _o_texture: Texture2D = preload("res://assets/sprites/o_mark.svg")
 var _empty_texture: Texture2D
@@ -51,6 +52,16 @@ func _on_cell_placed(event: Event) -> void:
 		var cell_idx: int = event.get("cell_index")
 		if cell_idx == cell_index:
 			refresh()
+			_play_place_animation()
+
+
+func _play_place_animation() -> void:
+	if _place_tween:
+		_place_tween.kill()
+	_place_tween = create_tween().set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_BOUNCE)
+	sprite.scale = Vector2(0, 0)
+	_place_tween.tween_property(sprite, "scale", Vector2(1.2, 1.2), 0.15)
+	_place_tween.tween_property(sprite, "scale", Vector2(1.0, 1.0), 0.1)
 
 
 func _on_game_started(_event: Event) -> void:
