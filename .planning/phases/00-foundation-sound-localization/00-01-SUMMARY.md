@@ -134,3 +134,8 @@ None — plan executed exactly as written.
 - Settings are read from ConfigFile on startup and written on game exit — PASS
 - Missing/corrupt settings file does not crash the game — PASS
 - SettingsManager autoload order precedes AudioController in project.godot (for downstream) — PASS
+
+## Self-Check: PASSED
+
+- Created files verified: scripts/events/setting_changed_event.gd (FOUND), autoload/settings_manager.gd (FOUND), SUMMARY.md (FOUND)
+- All 4 commits verified: 7ad4e65, fab5a50, 4f56cf1, 558cd4e

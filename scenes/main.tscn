@@ -1,21 +1,222 @@
-[gd_scene load_steps=2 format=3]
+[gd_scene format=3 uid="uid://d1lpgq4a7o0cg"]
 
-[ext_resource type="Script" path="res://scripts/main.gd" id="1_main"]
+[ext_resource type="Script" uid="uid://cnsta5jik25ng" path="res://scripts/main.gd" id="1_main"]
+[ext_resource type="PackedScene" path="res://scenes/cell.tscn" id="2_cell"]
 
-[node name="Main" type="Node2D"]
+[node name="Main" type="Node2D" unique_id=8715633]
 script = ExtResource("1_main")
 
-[node name="CanvasLayer" type="CanvasLayer" parent="."]
-layer = 400
+[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=1651061699]
 
-[node name="TransitionOverlay" type="ColorRect" parent="CanvasLayer"]
+[node name="MainMenu" type="Control" parent="CanvasLayer" unique_id=303871621]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ColorRect" type="ColorRect" parent="CanvasLayer/MainMenu" unique_id=1259676730]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-color = Color(0, 0, 0, 1)
-modulate = Color(0, 0, 0, 0)
+color = Color(0.08, 0.08, 0.12, 1)
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/MainMenu" unique_id=2011108231]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -150.0
+offset_top = -200.0
+offset_right = 150.0
+offset_bottom = 200.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 20
+
+[node name="TitleLabel" type="Label" parent="CanvasLayer/MainMenu/VBoxContainer" unique_id=2134858487]
+layout_mode = 2
+theme_override_font_sizes/font_size = 48
+text = "main_menu.title"
+horizontal_alignment = 1
+
+[node name="Spacer1" type="Control" parent="CanvasLayer/MainMenu/VBoxContainer" unique_id=1361350438]
+custom_minimum_size = Vector2(0, 20)
+layout_mode = 2
+
+[node name="PvPButton" type="Button" parent="CanvasLayer/MainMenu/VBoxContainer" unique_id=2024308579]
+layout_mode = 2
+theme_override_font_sizes/font_size = 24
+text = "main_menu.pvp"
+
+[node name="PvAIXButton" type="Button" parent="CanvasLayer/MainMenu/VBoxContainer" unique_id=105776375]
+layout_mode = 2
+text = "main_menu.pvai_x"
+
+[node name="PvAIOButton" type="Button" parent="CanvasLayer/MainMenu/VBoxContainer" unique_id=1638396814]
+layout_mode = 2
+text = "main_menu.pvai_o"
+
+[node name="Spacer2" type="Control" parent="CanvasLayer/MainMenu/VBoxContainer" unique_id=144867635]
+custom_minimum_size = Vector2(0, 20)
+layout_mode = 2
+
+[node name="ScoreLabel" type="Label" parent="CanvasLayer/MainMenu/VBoxContainer" unique_id=109872609]
+layout_mode = 2
+theme_override_font_sizes/font_size = 20
+text = "main_menu.score"
+horizontal_alignment = 1
+
+[node name="HUD" type="Control" parent="CanvasLayer" unique_id=1008028636]
 visible = false
-mouse_filter = 2
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/HUD" unique_id=1379931115]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 120.0
+grow_horizontal = 2
+
+[node name="ModeLabel" type="Label" parent="CanvasLayer/HUD/VBoxContainer" unique_id=821677687]
+layout_mode = 2
+theme_override_font_sizes/font_size = 22
+text = "hud.mode_pvp"
+horizontal_alignment = 1
+
+[node name="TurnLabel" type="Label" parent="CanvasLayer/HUD/VBoxContainer" unique_id=1077121370]
+layout_mode = 2
+theme_override_font_sizes/font_size = 32
+text = "hud.turn"
+horizontal_alignment = 1
+
+[node name="BackButton" type="Button" parent="CanvasLayer/HUD/VBoxContainer" unique_id=1533338464]
+layout_mode = 2
+size_flags_horizontal = 4
+text = "hud.back"
+
+[node name="GameOverPanel" type="Control" parent="CanvasLayer" unique_id=2010490980]
+visible = false
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="PanelBg" type="ColorRect" parent="CanvasLayer/GameOverPanel" unique_id=281726974]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 0.5)
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/GameOverPanel" unique_id=753178488]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -150.0
+offset_top = -100.0
+offset_right = 150.0
+offset_bottom = 100.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 15
+
+[node name="ResultLabel" type="Label" parent="CanvasLayer/GameOverPanel/VBoxContainer" unique_id=1967813856]
+layout_mode = 2
+theme_override_font_sizes/font_size = 40
+text = "game_over.win"
+horizontal_alignment = 1
+
+[node name="HBoxContainer" type="HBoxContainer" parent="CanvasLayer/GameOverPanel/VBoxContainer" unique_id=1199309998]
+layout_mode = 2
+alignment = 1
+
+[node name="RematchButton" type="Button" parent="CanvasLayer/GameOverPanel/VBoxContainer/HBoxContainer" unique_id=1871215671]
+layout_mode = 2
+text = "game_over.rematch"
+
+[node name="MenuButton" type="Button" parent="CanvasLayer/GameOverPanel/VBoxContainer/HBoxContainer" unique_id=1369052172]
+layout_mode = 2
+text = "game_over.back"
+
+[node name="Board" type="Node2D" parent="." unique_id=79110723]
+
+[node name="GridLineH1" type="Line2D" parent="Board" unique_id=745343313]
+points = PackedVector2Array(110, 260, 610, 260)
+width = 4.0
+default_color = Color(0.7, 0.7, 0.7, 1)
+
+[node name="GridLineH2" type="Line2D" parent="Board" unique_id=1294073732]
+points = PackedVector2Array(110, 460, 610, 460)
+width = 4.0
+default_color = Color(0.7, 0.7, 0.7, 1)
+
+[node name="GridLineV1" type="Line2D" parent="Board" unique_id=266493652]
+points = PackedVector2Array(260, 110, 260, 610)
+width = 4.0
+default_color = Color(0.7, 0.7, 0.7, 1)
+
+[node name="GridLineV2" type="Line2D" parent="Board" unique_id=711935655]
+points = PackedVector2Array(460, 110, 460, 610)
+width = 4.0
+default_color = Color(0.7, 0.7, 0.7, 1)
+
+[node name="Cell0" parent="Board" unique_id=1366297369 instance=ExtResource("2_cell")]
+position = Vector2(160, 160)
+
+[node name="Cell1" parent="Board" unique_id=1646171452 instance=ExtResource("2_cell")]
+position = Vector2(360, 160)
+cell_index = 1
+
+[node name="Cell2" parent="Board" unique_id=1238255388 instance=ExtResource("2_cell")]
+position = Vector2(560, 160)
+cell_index = 2
+
+[node name="Cell3" parent="Board" unique_id=677919497 instance=ExtResource("2_cell")]
+position = Vector2(160, 360)
+cell_index = 3
+
+[node name="Cell4" parent="Board" unique_id=2130641496 instance=ExtResource("2_cell")]
+position = Vector2(360, 360)
+cell_index = 4
+
+[node name="Cell5" parent="Board" unique_id=2096843749 instance=ExtResource("2_cell")]
+position = Vector2(560, 360)
+cell_index = 5
+
+[node name="Cell6" parent="Board" unique_id=1895664022 instance=ExtResource("2_cell")]
+position = Vector2(160, 560)
+cell_index = 6
+
+[node name="Cell7" parent="Board" unique_id=1671491579 instance=ExtResource("2_cell")]
+position = Vector2(360, 560)
+cell_index = 7
+
+[node name="Cell8" parent="Board" unique_id=313338593 instance=ExtResource("2_cell")]
+position = Vector2(560, 560)
+cell_index = 8
+
+[connection signal="pressed" from="CanvasLayer/MainMenu/VBoxContainer/PvPButton" to="." method="_on_pvp_pressed"]
+[connection signal="pressed" from="CanvasLayer/MainMenu/VBoxContainer/PvAIXButton" to="." method="_on_pvai_x_pressed"]
+[connection signal="pressed" from="CanvasLayer/MainMenu/VBoxContainer/PvAIOButton" to="." method="_on_pvai_o_pressed"]
+[connection signal="pressed" from="CanvasLayer/HUD/VBoxContainer/BackButton" to="." method="_on_back_to_menu_pressed"]
+[connection signal="pressed" from="CanvasLayer/GameOverPanel/VBoxContainer/HBoxContainer/RematchButton" to="." method="_on_rematch_pressed"]
+[connection signal="pressed" from="CanvasLayer/GameOverPanel/VBoxContainer/HBoxContainer/MenuButton" to="." method="_on_back_to_menu_pressed"]
