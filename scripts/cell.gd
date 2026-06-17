@@ -75,6 +75,8 @@ func _play_place_animation() -> void:
 func _on_game_started(_event: Event) -> void:
 	refresh()
 	enable()
+	set_highlight(false)
+	sprite.scale = Vector2(1.0, 1.0)
 
 
 func _on_game_over(_event: Event) -> void:
