@@ -48,7 +48,7 @@ Pixel-based spacing (Godot uses raw pixel values, not CSS rem). Use multiples of
 
 **Panel-specific spacing (theme_override_constants/separation):**
 - MainMenu VBox: separation=20
-- GameOver VBox: separation=15
+- GameOver VBox: separation=16
 - HUD VBox: separation=8 (compact score display)
 - Settings TabContainer tabs: separation=16
 - PauseMenu VBox: separation=20
@@ -68,16 +68,13 @@ One font weight available (MiSans-Semibold, effectively 600). All sizes are `the
 
 | Role | Size (px) | Weight | Usage |
 |------|-----------|--------|-------|
-| Display / Title | 48 | 600 (Semibold) | Main menu title ("井字棋") |
-| Heading / Result | 40 | 600 | Result label on GameOver panel |
-| Subheading | 32 | 600 | Turn indicator on HUD |
-| Large body / Button | 24 | 600 | Menu buttons (PvP, PvAI, Settings) |
-| Body (default) | 20 | 600 | Default theme size, score labels, settings labels |
-| Small / Version | 16 | 600 | Version string "v0.1.0", settings tab labels |
-| Tiny | 14 | 600 | Unused in this phase (reserved) |
+| Display / Title | 48 | 600 (Semibold) | Main menu title ("井字棋"), GameOver result text |
+| Subheading | 32 | 600 | HUD turn indicator, pause menu title, settings panel title |
+| Body / Button (default) | 20 | 600 | All buttons, score labels, settings labels, subtitle text, body text |
+| Small / Caption | 16 | 600 | Version string "v0.1.0", settings tab labels |
 
 **Button font overrides:**
-- Main menu buttons: 24px
+- Main menu buttons: 20px
 - Game over buttons: 20px
 - Settings buttons: 20px
 - Pause menu buttons: 20px
@@ -175,7 +172,8 @@ GameOver triggered (win/draw)
   -> UIManager.open_panel("tic_tac_toe:game_over")   (POPUP layer, overlays HUD)
 
 GameOver - [再来一局] pressed
-  -> GameManager.reset_board()
+  -> Publish RematchEvent via EventBus (D-05: panels never call GameManager directly)
+  -> GameManager subscribes to RematchEvent, calls reset_board() internally
   -> UIManager.close_panel("tic_tac_toe:game_over")   (POPUP closes, HUD resumes)
 
 GameOver - [返回主菜单] pressed
@@ -218,11 +216,11 @@ MainMenu - [退出游戏] pressed
 - Spacer: 20px
 - Subtitle: "Tic-Tac-Toe" (20px, text secondary color), horizontal_alignment = CENTER
 - Spacer: 32px
-- Button "双人对战" (24px, 260x48)
-- Button "人机对战" (24px, 260x48)
+- Button "双人对战" (20px, 260x48)
+- Button "人机对战" (20px, 260x48)
 - Spacer: 16px
-- Button "设置" (24px, 260x48)
-- Button "退出游戏" (24px, 260x48, destructive color on hover)
+- Button "设置" (20px, 260x48)
+- Button "退出游戏" (20px, 260x48, destructive color on hover)
 - Spacer: flexible (grow vertical)
 - VersionLabel: "v0.1.0" (16px, text secondary), horizontal_alignment = CENTER
 
@@ -239,7 +237,7 @@ MainMenu - [退出游戏] pressed
 - Full-screen Control (anchors PRESET_FULL_RECT)
 - Dimmer ColorRect: Color(0, 0, 0, 0.5) (same as UIManager's built-in dimmer -- UIManager auto-adds this for POPUP layer)
 - Centered VBoxContainer (300x200)
-- ResultLabel: "{player} Wins!" / "Draw!" (40px, title case)
+- ResultLabel: "{player} Wins!" / "Draw!" (48px, title case)
 - Spacer: 16px
 - Score recap: "X Wins: {n}  O Wins: {n}  Draws: {n}" (20px, text secondary)
 - Spacer: 24px
