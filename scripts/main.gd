@@ -34,6 +34,18 @@ func _setup_ui_registry() -> void:
 		UILayer.POPUP,
 		UIPanel.CacheMode.NONE
 	)
+	ui_reg.register_panel(
+		ResourceLocation.from_string("tic_tac_toe:pause_menu"),
+		preload("res://scenes/panels/pause_menu.tscn"),
+		UILayer.POPUP,
+		UIPanel.CacheMode.NONE
+	)
+	ui_reg.register_panel(
+		ResourceLocation.from_string("tic_tac_toe:settings"),
+		preload("res://scenes/panels/settings.tscn"),
+		UILayer.NORMAL,
+		UIPanel.CacheMode.CACHE
+	)
 
 
 func _subscribe_events() -> void:
@@ -42,6 +54,7 @@ func _subscribe_events() -> void:
 	EventBus.subscribe(&"GameWonEvent", _on_game_won)
 	EventBus.subscribe(&"GameDrawEvent", _on_game_draw)
 	EventBus.subscribe(&"LanguageChangedEvent", _on_language_changed)
+	EventBus.subscribe(&"NavigateToMenuEvent", _on_navigate_to_menu)
 
 
 func _setup_translations() -> void:
@@ -56,22 +69,25 @@ func _on_game_start_requested(event: Event) -> void:
 	var mode: int = event.get("mode")
 	var side: int = event.get("player_side")
 
-	# Close main menu, open HUD
-	UIManager.close_all(UILayer.NORMAL)
-	UIManager.open_panel(ResourceLocation.from_string("tic_tac_toe:hud"))
+	_fade_out(func():
+		UIManager.close_all(UILayer.NORMAL)
+		UIManager.open_panel(ResourceLocation.from_string("tic_tac_toe:hud"))
 
-	# Remove previous Board instance if any
-	var old_board := find_child("Board", true, false)
-	if old_board:
-		old_board.queue_free()
+		# Remove previous Board instance if any
+		var old_board := find_child("Board", true, false)
+		if old_board:
+			old_board.queue_free()
 
-	# Instantiate Board scene
-	var board_scene := preload("res://scenes/board.tscn")
-	var board_instance := board_scene.instantiate()
-	add_child(board_instance)
+		# Instantiate Board scene
+		var board_scene := preload("res://scenes/board.tscn")
+		var board_instance := board_scene.instantiate()
+		add_child(board_instance)
 
-	# Start the game
-	GameManager.start_game(mode, side)
+		# Start the game
+		GameManager.start_game(mode, side)
+
+		_fade_in()
+	)
 
 
 func _on_game_started(_event: Event) -> void:
@@ -101,7 +117,22 @@ func _on_language_changed(_event: Event) -> void:
 	pass
 
 
-# Transition helpers (scaffolded for Plan 2 fade animation wiring)
+func _on_navigate_to_menu(_event: Event) -> void:
+	_fade_out(func():
+		UIManager.close_all()
+		_remove_board()
+		UIManager.open_panel(ResourceLocation.from_string("tic_tac_toe:main_menu"))
+		_fade_in()
+	)
+
+
+func _remove_board() -> void:
+	var board := find_child("Board", true, false)
+	if board:
+		board.queue_free()
+
+
+# Transition helpers
 func _fade_out(callback: Callable) -> void:
 	transition_overlay.visible = true
 	transition_overlay.modulate.a = 0.0

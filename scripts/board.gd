@@ -12,17 +12,25 @@ var _nav_stick_action: GUIDEAction
 var _stick_accumulator: Vector2 = Vector2.ZERO
 const STICK_THRESHOLD: float = 0.3
 
+var _win_line_tween: Tween
+var _pulse_tween: Tween
+const WIN_LINE_COLOR: Color = Color(0.91, 0.72, 0.29, 1)
+
 
 func _ready() -> void:
 	EventBus.subscribe(&"GameStartedEvent", _on_game_started)
-	EventBus.subscribe(&"GameWonEvent", _on_game_over)
+	EventBus.subscribe(&"GameWonEvent", _on_game_won)
 	EventBus.subscribe(&"GameDrawEvent", _on_game_over)
+	EventBus.subscribe(&"GamePausedEvent", _on_game_paused)
+	EventBus.subscribe(&"GameResumedEvent", _on_game_resumed)
 
 
 func _exit_tree() -> void:
 	EventBus.unsubscribe(&"GameStartedEvent", _on_game_started)
-	EventBus.unsubscribe(&"GameWonEvent", _on_game_over)
+	EventBus.unsubscribe(&"GameWonEvent", _on_game_won)
 	EventBus.unsubscribe(&"GameDrawEvent", _on_game_over)
+	EventBus.unsubscribe(&"GamePausedEvent", _on_game_paused)
+	EventBus.unsubscribe(&"GameResumedEvent", _on_game_resumed)
 	_disable_guide_context()
 
 
@@ -203,9 +211,93 @@ func _is_mouse_or_touch_active() -> bool:
 
 func _on_game_started(_event: Event) -> void:
 	_stick_accumulator = Vector2.ZERO
+	# Remove any previous win line padding
+	for child in get_children():
+		if child is Line2D and child.name.begins_with("WinLine"):
+			child.queue_free()
 	if not _gameplay_context:
 		_setup_guide_input()
 
 
+func _on_game_won(event: Event) -> void:
+	var winner: int = event.get("winner")
+	var win_indices := _get_win_line_indices(winner)
+	if win_indices.size() == 3:
+		_animate_win_line(win_indices)
+		_animate_winning_cells(win_indices)
+	# Keep GUIDE context active so player can see the line, then dismiss on next game start
+
+
 func _on_game_over(_event: Event) -> void:
 	_disable_guide_context()
+
+
+func _on_game_paused(_event: Event) -> void:
+	if _gameplay_context:
+		GUIDE.disable_mapping_context(_gameplay_context)
+
+
+func _on_game_resumed(_event: Event) -> void:
+	if _gameplay_context:
+		GUIDE.enable_mapping_context(_gameplay_context, false, 0)
+
+
+func _get_win_line_indices(winner: int) -> Array:
+	var cells := get_tree().get_nodes_in_group("cell")
+	for line in GameManager.WIN_LINES:
+		var a: int = GameManager.get_cell(line[0])
+		var b: int = GameManager.get_cell(line[1])
+		var c: int = GameManager.get_cell(line[2])
+		if a == winner and b == winner and c == winner:
+			return line
+	return []
+
+
+# --- Win line animation ---
+
+func _animate_win_line(win_indices: Array) -> void:
+	var cells := get_tree().get_nodes_in_group("cell")
+	var positions: Array[Vector2] = []
+	for idx in win_indices:
+		for c in cells:
+			if c is Cell and c.cell_index == idx:
+				positions.append(c.position)
+				break
+
+	if positions.size() != 3:
+		return
+
+	# Calculate start and end points, extending by half cell size
+	var start: Vector2 = positions[0]
+	var end: Vector2 = positions[2]
+	var dir: Vector2 = (end - start).normalized()
+	var extend: float = 80.0  # half cell width/height
+	start -= dir * extend
+	end += dir * extend
+
+	var win_line := Line2D.new()
+	win_line.name = "WinLine"
+	win_line.default_color = WIN_LINE_COLOR
+	win_line.width = 0.0
+	win_line.add_point(start)
+	win_line.add_point(end)
+	win_line.z_index = 10
+	add_child(win_line)
+
+	if _win_line_tween:
+		_win_line_tween.kill()
+	_win_line_tween = create_tween().set_parallel(true)
+	_win_line_tween.tween_property(win_line, "width", 6.0, 0.3).set_trans(Tween.TRANS_SPRING).set_ease(Tween.EASE_OUT)
+	_win_line_tween.tween_property(win_line, "default_color:a", 1.0, 0.3)
+
+
+func _animate_winning_cells(win_indices: Array) -> void:
+	var cells := get_tree().get_nodes_in_group("cell")
+	for idx in win_indices:
+		for c in cells:
+			if c is Cell and c.cell_index == idx and c.highlight:
+				if _pulse_tween:
+					_pulse_tween.kill()
+				_pulse_tween = create_tween().set_parallel(true).set_loops(2)
+				_pulse_tween.tween_property(c.highlight, "modulate:a", 0.6, 0.4).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN_OUT)
+				_pulse_tween.tween_property(c.highlight, "modulate:a", 0.0, 0.4).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN_OUT)
