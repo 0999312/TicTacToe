@@ -107,10 +107,15 @@ func _on_difficulty_selected(level: int) -> void:
 func _update_difficulty_highlight(selected: int) -> void:
 	var buttons := [easy_button, medium_button, hard_button]
 	for i in range(buttons.size()):
+		var sb := buttons[i].get_theme_stylebox("normal").duplicate() as StyleBoxFlat
 		if i == selected:
-			buttons[i].modulate = ACCENT_COLOR
+			sb.border_width_bottom = 3
+			sb.border_color = ACCENT_COLOR
 		else:
-			buttons[i].modulate = Color.WHITE
+			sb.border_width_bottom = 0
+		buttons[i].add_theme_stylebox_override("normal", sb)
+		buttons[i].add_theme_stylebox_override("hover", sb)
+		buttons[i].add_theme_stylebox_override("pressed", sb)
 
 
 func _on_language_selected(index: int) -> void:
