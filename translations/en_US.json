@@ -1,0 +1,31 @@
+{
+  "main_menu": {
+    "title": "Tic-Tac-Toe",
+    "pvp": "Player vs Player",
+    "pvai_x": "Player vs AI - First",
+    "pvai_o": "Player vs AI - Second",
+    "score": "X Wins: {0}  |  O Wins: {1}  |  Draws: {2}"
+  },
+  "hud": {
+    "mode_pvp": "Player vs Player",
+    "mode_pvai": "Player vs AI",
+    "turn": "Turn: {0}",
+    "back": "Back to Menu"
+  },
+  "game_over": {
+    "win": "{0} Wins!",
+    "draw": "Draw!",
+    "rematch": "Play Again",
+    "back": "Back to Menu"
+  },
+  "settings": {
+    "title": "Settings",
+    "sfx_volume": "SFX Volume",
+    "music_volume": "Music Volume",
+    "difficulty": "Difficulty",
+    "language": "Language",
+    "easy": "Easy",
+    "medium": "Medium",
+    "hard": "Hard"
+  }
+}
