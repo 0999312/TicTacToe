@@ -28,8 +28,8 @@ EventBus="*uid://dqjaimeyl43vd"
 SettingsManager="*res://autoload/settings_manager.gd"
 I18NManager="*uid://wj05s0mpoqn"
 UIManager="*uid://b0mn85k3pon1l"
-SoundManager="*uid://bjex7rgsn4fi1"
 GUIDE="*res://addons/guide/guide.gd"
+AudioController="*res://autoload/audio_controller.gd"
 
 [display]
 
@@ -56,3 +56,7 @@ place_mark={
 [rendering]
 
 textures/canvas_textures/default_texture_filter=0
+
+[gui]
+
+theme/custom="res://resources/theme/default_theme.tres"
