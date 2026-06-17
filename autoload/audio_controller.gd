@@ -101,8 +101,8 @@ func _exit_tree() -> void:
 # --- Volume Initialization ---
 
 func _apply_volumes() -> void:
-	var sfx_vol := SettingsManager.get("audio/sfx_volume", 0.8) as float
-	var music_vol := SettingsManager.get("audio/music_volume", 0.8) as float
+	var sfx_vol := SettingsManager.get_value("audio/sfx_volume", 0.8) as float
+	var music_vol := SettingsManager.get_value("audio/music_volume", 0.8) as float
 	SoundManager.set_sound_volume(clampf(sfx_vol, 0.0, 1.0))
 	SoundManager.set_music_volume(clampf(music_vol, 0.0, 1.0))
 

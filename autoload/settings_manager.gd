@@ -15,11 +15,11 @@ func _ready() -> void:
 	_load_config()
 
 
-func get(key: String, default: Variant = null) -> Variant:
+func get_value(key: String, default: Variant = null) -> Variant:
 	return _cache.get(key, default)
 
 
-func set(key: String, value: Variant) -> void:
+func set_value(key: String, value: Variant) -> void:
 	_cache[key] = value
 	EventBus.publish(SettingChangedEvent.new(key, value))
 

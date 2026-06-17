@@ -30,7 +30,7 @@ func _ready() -> void:
 	_setup_guide_input()
 	I18NManager.load_translation("zh_CN", "res://translations/zh_CN.json")
 	I18NManager.load_translation("en_US", "res://translations/en_US.json")
-	var saved_locale := SettingsManager.get("language/locale", "zh_CN") as String
+	var saved_locale := SettingsManager.get_value("language/locale", "zh_CN") as String
 	I18NManager.set_language(saved_locale)
 
 
