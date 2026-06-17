@@ -26,7 +26,12 @@ func _ready() -> void:
 	EventBus.subscribe(&"GameWonEvent", _on_game_won)
 	EventBus.subscribe(&"GameDrawEvent", _on_game_draw)
 	EventBus.subscribe(&"ScoreChangedEvent", _on_score_changed)
+	EventBus.subscribe(&"LanguageChangedEvent", _on_language_changed)
 	_setup_guide_input()
+	I18NManager.load_translation("zh_CN", "res://translations/zh_CN.json")
+	I18NManager.load_translation("en_US", "res://translations/en_US.json")
+	var saved_locale := SettingsManager.get("language/locale", "zh_CN") as String
+	I18NManager.set_language(saved_locale)
 
 
 func _setup_guide_input() -> void:
@@ -226,7 +231,7 @@ func _on_back_to_menu_pressed() -> void:
 func _on_game_started(event: Event) -> void:
 	var mode_val: int = event.get("mode")
 	_show_only(hud)
-	var mode_text := "双人对战" if mode_val == GameManager.GameMode.PVP else "人机对战"
+	var mode_text := tr("hud.mode_pvp") if mode_val == GameManager.GameMode.PVP else tr("hud.mode_pvai")
 	mode_label.text = mode_text
 	_stick_accumulator = Vector2.ZERO
 
@@ -234,18 +239,18 @@ func _on_game_started(event: Event) -> void:
 func _on_turn_changed(event: Event) -> void:
 	var player_val: int = event.get("player")
 	var player_text := "X" if player_val == GameManager.Player.X else "O"
-	turn_label.text = "轮到: " + player_text
+	turn_label.text = tr("hud.turn").format([player_text])
 
 
 func _on_game_won(event: Event) -> void:
 	var winner_val: int = event.get("winner")
 	var winner_text := "X" if winner_val == GameManager.Player.X else "O"
-	result_label.text = winner_text + " 获胜!"
+	result_label.text = tr("game_over.win").format([winner_text])
 	_show_only(game_over_panel)
 
 
 func _on_game_draw(_event: Event) -> void:
-	result_label.text = "平局!"
+	result_label.text = tr("game_over.draw")
 	_show_only(game_over_panel)
 
 
@@ -253,7 +258,20 @@ func _on_score_changed(event: Event) -> void:
 	var p1: int = event.get("p1_score")
 	var p2: int = event.get("p2_score")
 	var d: int = event.get("draw_score")
-	score_label.text = "X胜: %d  |  O胜: %d  |  平局: %d" % [p1, p2, d]
+	score_label.text = tr("main_menu.score").format([p1, p2, d])
+
+
+func _on_language_changed(_event: Event) -> void:
+	_refresh_text()
+
+
+func _refresh_text() -> void:
+	# Update all dynamic text elements
+	if GameManager.state == GameManager.GameState.PLAYING or GameManager.state == GameManager.GameState.OVER:
+		var mode_key := "hud.mode_pvp" if GameManager.mode == GameManager.GameMode.PVP else "hud.mode_pvai"
+		mode_label.text = tr(mode_key)
+		turn_label.text = tr("hud.turn").format([GameManager.get_current_player_text()])
+	score_label.text = tr("main_menu.score").format([GameManager.player1_score, GameManager.player2_score, GameManager.draw_score])
 
 
 # --- helpers ---
