@@ -2,6 +2,7 @@ extends Node
 
 # Sound cache: maps "tic_tac_toe:sounds/..." string keys to preloaded AudioStream
 var _sound_cache: Dictionary = {}
+var _current_music_key: String = ""
 
 
 func _ready() -> void:
@@ -69,6 +70,10 @@ func _cache_sounds() -> void:
 		ResourceLocation.from_string("tic_tac_toe:music/background"),
 		load("res://music/off_to_osaka.mp3")
 	)
+	registry.register(
+		ResourceLocation.from_string("tic_tac_toe:music/breaktime"),
+		load("res://music/breaktime.mp3")
+	)
 
 	# Preload all registered sounds into _sound_cache
 	for key_str in registry.get_all_keys():
@@ -88,6 +93,7 @@ func _subscribe_events() -> void:
 	EventBus.subscribe(&"GameDrawEvent", _on_game_draw)
 	EventBus.subscribe(&"GameStartedEvent", _on_game_started)
 	EventBus.subscribe(&"SettingChangedEvent", _on_setting_changed)
+	EventBus.subscribe(&"NavigateToMenuEvent", _on_navigate_to_menu)
 
 
 func _exit_tree() -> void:
@@ -96,6 +102,7 @@ func _exit_tree() -> void:
 	EventBus.unsubscribe(&"GameDrawEvent", _on_game_draw)
 	EventBus.unsubscribe(&"GameStartedEvent", _on_game_started)
 	EventBus.unsubscribe(&"SettingChangedEvent", _on_setting_changed)
+	EventBus.unsubscribe(&"NavigateToMenuEvent", _on_navigate_to_menu)
 
 
 # --- Volume Initialization ---
@@ -113,6 +120,7 @@ func _start_menu_music() -> void:
 	var music_stream := _sound_cache.get("tic_tac_toe:music/background") as AudioStream
 	if music_stream:
 		SoundManager.play_music(music_stream, 0.5)
+		_current_music_key = "tic_tac_toe:music/background"
 
 
 # --- Event Handlers ---
@@ -139,9 +147,21 @@ func _on_game_draw(_event: Event) -> void:
 
 
 func _on_game_started(_event: Event) -> void:
+	if _current_music_key == "tic_tac_toe:music/breaktime":
+		return  # Already playing gameplay music
+	var music_stream := _sound_cache.get("tic_tac_toe:music/breaktime") as AudioStream
+	if music_stream:
+		SoundManager.play_music(music_stream, 1.0)
+		_current_music_key = "tic_tac_toe:music/breaktime"
+
+
+func _on_navigate_to_menu(_event: Event) -> void:
+	if _current_music_key == "tic_tac_toe:music/background":
+		return  # Already playing menu music
 	var music_stream := _sound_cache.get("tic_tac_toe:music/background") as AudioStream
 	if music_stream:
-		SoundManager.play_music(music_stream, 0.5)
+		SoundManager.play_music(music_stream, 1.0)
+		_current_music_key = "tic_tac_toe:music/background"
 
 
 func _on_setting_changed(event: Event) -> void:
