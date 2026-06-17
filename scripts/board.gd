@@ -221,6 +221,9 @@ func _is_mouse_or_touch_active() -> bool:
 
 func _on_game_started(_event: Event) -> void:
 	_stick_accumulator = Vector2.ZERO
+	if _pulse_tween:
+		_pulse_tween.kill()
+		_pulse_tween = null
 	# Remove any previous win line padding
 	for child in get_children():
 		if child is Line2D and child.name.begins_with("WinLine"):

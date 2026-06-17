@@ -77,6 +77,8 @@ func _on_game_started(_event: Event) -> void:
 	refresh()
 	enable()
 	set_highlight(false)
+	if highlight:
+		highlight.modulate.a = 1.0
 	sprite.scale = Vector2(1.0, 1.0)
 
 
