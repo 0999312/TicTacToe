@@ -23,6 +23,14 @@ func _ready() -> void:
 		highlight.visible = false
 
 
+func _exit_tree() -> void:
+	EventBus.unsubscribe(&"CellPlacedEvent", _on_cell_placed)
+	EventBus.unsubscribe(&"GameStartedEvent", _on_game_started)
+	EventBus.unsubscribe(&"GameWonEvent", _on_game_over)
+	EventBus.unsubscribe(&"GameDrawEvent", _on_game_over)
+	EventBus.unsubscribe(&"CursorMovedEvent", _on_cursor_moved)
+
+
 func refresh() -> void:
 	var val := GameManager.get_cell(cell_index)
 	match val:
