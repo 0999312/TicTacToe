@@ -54,8 +54,8 @@ This is a brownfield polish phase for an already-functional Tic-Tac-Toe game bui
 **Plans**: 2 plans
 **Mode**: mvp
 **UI hint**: yes
-
 Plans:
+
 - [ ] `01-01-PLAN.md` — Core game loop with UIManager: Board extraction, MainMenu/HUD/GameOver UIPanel scenes, full UIManager migration, CQ-02/CQ-03, RematchEvent, ja_JP translation
 - [ ] `01-02-PLAN.md` — Full polish: All animations (place mark bounce, win line, button micro, scene transitions), PauseMenu with Esc, Settings panel with 3 tabs, second music track with crossfade
 
