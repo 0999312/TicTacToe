@@ -9,6 +9,7 @@ var _nav_down_action: GUIDEAction
 var _nav_left_action: GUIDEAction
 var _nav_right_action: GUIDEAction
 var _nav_stick_action: GUIDEAction
+var _esc_action: GUIDEAction
 var _stick_accumulator: Vector2 = Vector2.ZERO
 const STICK_THRESHOLD: float = 0.3
 
@@ -96,6 +97,16 @@ func _setup_guide_input() -> void:
 		joy_axis, [], [GUIDETriggerDown.new()]))
 	_gameplay_context.mappings.append(stick_mapping)
 
+	# Esc -> open PauseMenu (always add to context; signal connected once)
+	if not _esc_action:
+		_esc_action = GUIDEAction.new()
+		_esc_action.just_triggered.connect(_on_esc_pressed)
+	var esc_mapping := GUIDEActionMapping.new()
+	esc_mapping.action = _esc_action
+	esc_mapping.input_mappings.append(_make_input_mapping(
+		_make_key(KEY_ESCAPE), [], [GUIDETriggerPressed.new()]))
+	_gameplay_context.mappings.append(esc_mapping)
+
 	# Connect signals (with guard against duplicate connections on re-entry)
 	if not _place_mark_action.just_triggered.is_connected(_on_place_mark):
 		_place_mark_action.just_triggered.connect(_on_place_mark)
@@ -104,15 +115,6 @@ func _setup_guide_input() -> void:
 		_nav_left_action.just_triggered.connect(func(): _on_nav_discrete(Vector2(-1, 0)))
 		_nav_right_action.just_triggered.connect(func(): _on_nav_discrete(Vector2(1, 0)))
 		_nav_stick_action.triggered.connect(_on_nav_stick)
-
-		# Esc -> open PauseMenu
-		var esc_action := GUIDEAction.new()
-		var esc_mapping := GUIDEActionMapping.new()
-		esc_mapping.action = esc_action
-		esc_mapping.input_mappings.append(_make_input_mapping(
-			_make_key(KEY_ESCAPE), [], [GUIDETriggerPressed.new()]))
-		_gameplay_context.mappings.append(esc_mapping)
-		esc_action.just_triggered.connect(_on_esc_pressed)
 
 	GUIDE.enable_mapping_context(_gameplay_context, false, 0)
 
