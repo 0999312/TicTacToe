@@ -10,7 +10,7 @@ This is a brownfield polish phase for an already-functional Tic-Tac-Toe game bui
 
 ## Phases
 
-- [x] **Phase 0: Foundation, Sound & Localization** (1/3 plans complete) - Stable infrastructure, audio feedback, and bilingual support (completed 2026-06-17)
+- [x] **Phase 0: Foundation, Sound & Localization** (3/3 plans complete) - Stable infrastructure, audio feedback, and bilingual support (completed 2026-06-17)
 - [ ] **Phase 1: UI & Animations** - Polished navigation flow and visual animations
 - [ ] **Phase 2: AI** - Minimax upgrade with three difficulty tiers
 
@@ -51,9 +51,13 @@ This is a brownfield polish phase for an already-functional Tic-Tac-Toe game bui
   4. X and O pieces scale from 0 to 1 with a bounce effect when placed; winning line draws with a smooth Tween animation across the three winning cells
   5. Scene transitions fade in and out between menu and gameplay via CanvasLayer; buttons respond with scale and color changes on mouse hover
 
-**Plans**: TBD
+**Plans**: 2 plans
 **Mode**: mvp
 **UI hint**: yes
+
+Plans:
+- [ ] `01-01-PLAN.md` — Core game loop with UIManager: Board extraction, MainMenu/HUD/GameOver UIPanel scenes, full UIManager migration, CQ-02/CQ-03, RematchEvent, ja_JP translation
+- [ ] `01-02-PLAN.md` — Full polish: All animations (place mark bounce, win line, button micro, scene transitions), PauseMenu with Esc, Settings panel with 3 tabs, second music track with crossfade
 
 ### Phase 2: AI
 
@@ -75,5 +79,5 @@ This is a brownfield polish phase for an already-functional Tic-Tac-Toe game bui
 | Phase | Plans Complete | Status | Completed |
 |-------|----------------|--------|-----------|
 | 0. Foundation, Sound & Localization | 3/3 | Complete    | 2026-06-17 |
-| 1. UI & Animations | 0/0 | Not started | - |
+| 1. UI & Animations | 0/2 | Not started | - |
 | 2. AI | 0/0 | Not started | - |
