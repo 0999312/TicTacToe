@@ -25,7 +25,7 @@ func _setup_ui_registry() -> void:
 	ui_reg.register_panel(
 		ResourceLocation.from_string("tic_tac_toe:hud"),
 		preload("res://scenes/panels/hud.tscn"),
-		UILayer.NORMAL,
+		UILayer.SCENE,
 		UIPanel.CacheMode.CACHE
 	)
 	ui_reg.register_panel(
