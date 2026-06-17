@@ -33,7 +33,8 @@ This is a brownfield polish phase for an already-functional Tic-Tac-Toe game bui
 **Mode**: mvp
 **Plans:**
 
-- [x] `00-01-PLAN.md` — Event system hardening (class_name, StringName subscriptions, direct publishing) + SettingsManager autoload with ConfigFile persistence
+2/3 plans executed
+
 - [ ] `00-02-PLAN.md` — Audio system (AudioController, SoundRegistry, SFX/Music buses, kenney sounds, music crossfade) + MiSans-Semibold theme resource
 - [ ] `00-03-PLAN.md` — Bilingual localization (zh_CN/en_US JSON translation files, tr() adoption in all UI text, LanguageChangedEvent subscription, locale restore)
 
@@ -73,6 +74,6 @@ This is a brownfield polish phase for an already-functional Tic-Tac-Toe game bui
 
 | Phase | Plans Complete | Status | Completed |
 |-------|----------------|--------|-----------|
-| 0. Foundation, Sound & Localization | 1/3 | Executing | 2026-06-17 |
+| 0. Foundation, Sound & Localization | 2/3 | In Progress|  |
 | 1. UI & Animations | 0/0 | Not started | - |
 | 2. AI | 0/0 | Not started | - |

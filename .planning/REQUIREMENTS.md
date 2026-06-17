@@ -10,8 +10,8 @@ Requirements for the polish milestone. Each maps to roadmap phases.
 ### Foundation
 
 - [x] **FND-01**: EventBus script path use StringName constants to replace hardcoded strings
-- [ ] **FND-02**: Remove SoundManager double registration, verify singleton correctness
-- [ ] **FND-03**: Create AudioBusLayout (SFX / Music / UI three buses)
+- [x] **FND-02**: Remove SoundManager double registration, verify singleton correctness
+- [x] **FND-03**: Create AudioBusLayout (SFX / Music / UI three buses)
 - [x] **FND-04**: Add `push_error`/`push_warning` error handling to project code
 
 ### UI
@@ -24,10 +24,10 @@ Requirements for the polish milestone. Each maps to roadmap phases.
 
 ### Sound
 
-- [ ] **SND-01**: Game SFX playback -- place mark sound, win sound, lose sound, draw sound
-- [ ] **SND-02**: Button interaction sounds -- click sound, hover sound (use kenney_interface_sounds)
-- [ ] **SND-03**: Background music -- menu music, in-game music, with crossfade switching
-- [ ] **SND-04**: Independent SFX and music volume control via settings panel sliders
+- [x] **SND-01**: Game SFX playback -- place mark sound, win sound, lose sound, draw sound
+- [x] **SND-02**: Button interaction sounds -- click sound, hover sound (use kenney_interface_sounds)
+- [x] **SND-03**: Background music -- menu music, in-game music, with crossfade switching
+- [x] **SND-04**: Independent SFX and music volume control via settings panel sliders
 
 ### AI
 
@@ -46,7 +46,7 @@ Requirements for the polish milestone. Each maps to roadmap phases.
 ### Localization
 
 - [ ] **L10N-01**: Chinese and English translation files (JSON format, ASCII-only key ID)
-- [ ] **L10N-02**: CJK font fallback support (Noto Sans SC or equivalent)
+- [x] **L10N-02**: CJK font fallback support (Noto Sans SC or equivalent)
 - [ ] **L10N-03**: In-game language switch (settings panel), takes effect in real-time
 - [ ] **L10N-04**: All UI text uses `tr()` function for automatic translation
 
@@ -86,17 +86,17 @@ Which phases cover which requirements. Updated during roadmap creation.
 | Requirement | Phase | Status |
 |-------------|-------|--------|
 | FND-01 | Phase 0 | Complete (00-01) |
-| FND-02 | Phase 0 | Pending |
-| FND-03 | Phase 0 | Pending |
+| FND-02 | Phase 0 | Complete |
+| FND-03 | Phase 0 | Complete |
 | FND-04 | Phase 0 | Complete (00-01) |
 | CQ-01 | Phase 0 | Complete (00-01) |
 | CQ-04 | Phase 0 | Complete (00-01) |
-| SND-01 | Phase 0 | Pending |
-| SND-02 | Phase 0 | Pending |
-| SND-03 | Phase 0 | Pending |
-| SND-04 | Phase 0 | Pending |
+| SND-01 | Phase 0 | Complete |
+| SND-02 | Phase 0 | Complete |
+| SND-03 | Phase 0 | Complete |
+| SND-04 | Phase 0 | Complete |
 | L10N-01 | Phase 0 | Pending |
-| L10N-02 | Phase 0 | Pending |
+| L10N-02 | Phase 0 | Complete |
 | L10N-03 | Phase 0 | Pending |
 | L10N-04 | Phase 0 | Pending |
 | UI-01 | Phase 1 | Pending |
@@ -116,6 +116,7 @@ Which phases cover which requirements. Updated during roadmap creation.
 | AI-04 | Phase 2 | Pending |
 
 **Coverage:**
+
 - v1 requirements: 29 total
 - Mapped to phases: 29
 - Unmapped: 0
