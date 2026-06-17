@@ -10,6 +10,7 @@ static func setup_button_animation(button: Button) -> void:
 	)
 
 	button.mouse_entered.connect(func():
+		AudioController.play_button_hover()
 		if button.has_meta(&"hover_tween"):
 			var prev: Tween = button.get_meta(&"hover_tween") as Tween
 			if prev and prev.is_valid():
@@ -32,6 +33,7 @@ static func setup_button_animation(button: Button) -> void:
 	)
 
 	button.button_down.connect(func():
+		AudioController.play_button_click()
 		if button.has_meta(&"press_tween"):
 			var prev: Tween = button.get_meta(&"press_tween") as Tween
 			if prev and prev.is_valid():
