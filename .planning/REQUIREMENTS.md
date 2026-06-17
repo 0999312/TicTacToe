@@ -16,11 +16,11 @@ Requirements for the polish milestone. Each maps to roadmap phases.
 
 ### UI
 
-- [ ] **UI-01**: Main menu interface -- title, PvP/PvAI buttons, settings button, quit button
-- [ ] **UI-02**: In-game HUD -- current player indicator (X/O), score display (X wins/O wins/draws)
-- [ ] **UI-03**: Game over panel -- result display (winner/draw), play again, back to menu buttons
-- [ ] **UI-04**: Settings panel -- SFX/music volume sliders, AI difficulty selection, language switch
-- [ ] **UI-05**: All UI panels use UIManager stack management to replace `_show_only()` direct manipulation
+- [x] **UI-01**: Main menu interface -- title, PvP/PvAI buttons, settings button, quit button
+- [x] **UI-02**: In-game HUD -- current player indicator (X/O), score display (X wins/O wins/draws)
+- [x] **UI-03**: Game over panel -- result display (winner/draw), play again, back to menu buttons
+- [x] **UI-04**: Settings panel -- SFX/music volume sliders, AI difficulty selection, language switch
+- [x] **UI-05**: All UI panels use UIManager stack management to replace `_show_only()` direct manipulation
 
 ### Sound
 
@@ -38,10 +38,10 @@ Requirements for the polish milestone. Each maps to roadmap phases.
 
 ### Animation
 
-- [ ] **ANM-01**: Win line animation -- Tween draws a highlight line across the winning row/column/diagonal
-- [ ] **ANM-02**: Place mark animation -- X/O piece scale bounces from 0 to 1
-- [ ] **ANM-03**: Scene transition -- menu <-> game fade in/out effect (CanvasLayer + ColorRect)
-- [ ] **ANM-04**: Button micro-interaction -- subtle scale/color change on hover
+- [x] **ANM-01**: Win line animation -- Tween draws a highlight line across the winning row/column/diagonal
+- [x] **ANM-02**: Place mark animation -- X/O piece scale bounces from 0 to 1
+- [x] **ANM-03**: Scene transition -- menu <-> game fade in/out effect (CanvasLayer + ColorRect)
+- [x] **ANM-04**: Button micro-interaction -- subtle scale/color change on hover
 
 ### Localization
 
@@ -53,8 +53,8 @@ Requirements for the polish milestone. Each maps to roadmap phases.
 ### Code Quality
 
 - [x] **CQ-01**: Eliminate EventBus hardcoded script path strings, use StringName constants
-- [ ] **CQ-02**: Add parameter validation and `push_warning` to all GameManager public methods
-- [ ] **CQ-03**: Extract duplicate code to shared helper functions
+- [x] **CQ-02**: Add parameter validation and `push_warning` to all GameManager public methods
+- [x] **CQ-03**: Extract duplicate code to shared helper functions
 - [x] **CQ-04**: Settings persistence -- ConfigFile save/load for volume, difficulty, language
 
 ## v2 Requirements
@@ -99,17 +99,17 @@ Which phases cover which requirements. Updated during roadmap creation.
 | L10N-02 | Phase 0 | Complete |
 | L10N-03 | Phase 0 | Complete |
 | L10N-04 | Phase 0 | Complete |
-| UI-01 | Phase 1 | Pending |
-| UI-02 | Phase 1 | Pending |
-| UI-03 | Phase 1 | Pending |
-| UI-04 | Phase 1 | Pending |
-| UI-05 | Phase 1 | Pending |
-| ANM-01 | Phase 1 | Pending |
-| ANM-02 | Phase 1 | Pending |
-| ANM-03 | Phase 1 | Pending |
-| ANM-04 | Phase 1 | Pending |
-| CQ-02 | Phase 1 | Pending |
-| CQ-03 | Phase 1 | Pending |
+| UI-01 | Phase 1 | Complete |
+| UI-02 | Phase 1 | Complete |
+| UI-03 | Phase 1 | Complete |
+| UI-04 | Phase 1 | Complete |
+| UI-05 | Phase 1 | Complete |
+| ANM-01 | Phase 1 | Complete |
+| ANM-02 | Phase 1 | Complete |
+| ANM-03 | Phase 1 | Complete |
+| ANM-04 | Phase 1 | Complete |
+| CQ-02 | Phase 1 | Complete |
+| CQ-03 | Phase 1 | Complete |
 | AI-01 | Phase 2 | Pending |
 | AI-02 | Phase 2 | Pending |
 | AI-03 | Phase 2 | Pending |

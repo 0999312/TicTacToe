@@ -79,5 +79,5 @@ Plans:
 | Phase | Plans Complete | Status | Completed |
 |-------|----------------|--------|-----------|
 | 0. Foundation, Sound & Localization | 3/3 | Complete    | 2026-06-17 |
-| 1. UI & Animations | 2/2 | Complete   | 2026-06-17 |
+| 1. UI & Animations | 2/2 | Complete    | 2026-06-17 |
 | 2. AI | 0/0 | Not started | - |
