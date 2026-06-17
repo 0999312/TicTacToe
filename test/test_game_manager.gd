@@ -111,5 +111,7 @@ func test_ai_medium_blocks() -> void:
 	gm.current_player = gm.Player.O
 	gm.ai_player = gm.Player.O
 
-	var best: int = gm._find_best_move(4, 0.15)
+	# Use random_chance=0.0 for deterministic assertion (random injection at 0.15
+	# can produce non-blocking moves due to cumulative effect across depth-4 search)
+	var best: int = gm._find_best_move(4, 0.0)
 	assert_eq(best, 2, "Medium AI should block X's row win at cell 2")

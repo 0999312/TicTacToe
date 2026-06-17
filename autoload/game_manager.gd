@@ -9,6 +9,10 @@ const WIN_LINES: Array[Array] = [
 	[0, 3, 6], [1, 4, 7], [2, 5, 8],
 	[0, 4, 8], [2, 4, 6],
 ]
+const INF_SCORE := 1000000
+const EASY := 0
+const MEDIUM := 1
+const HARD := 2
 
 var board: Array = []
 var current_player: Player = Player.X
@@ -61,6 +65,7 @@ func start_game(p_mode: GameMode, p_player_side: Player = Player.X) -> void:
 
 
 func reset_board() -> void:
+	ai_timer.stop()
 	_init_board()
 	state = GameState.PLAYING
 	EventBus.publish(GameStartedEvent.new(mode))
@@ -165,56 +170,142 @@ func _is_board_full() -> bool:
 
 
 func _schedule_ai_move() -> void:
-	ai_timer.start(0.3)
+	EventBus.publish(AiThinkingEvent.new(true))
+	var difficulty: int = SettingsManager.get_value("gameplay/difficulty", 1) as int
+	var delay: float = _get_ai_delay(difficulty)
+	call_deferred("_start_ai_timer", delay)
+
+
+func _get_ai_delay(difficulty: int) -> float:
+	match difficulty:
+		EASY:
+			return randf_range(0.5, 1.0)
+		MEDIUM:
+			return randf_range(0.3, 0.6)
+		HARD:
+			return randf_range(0.2, 0.4)
+		_:
+			return 0.5
+
+
+func _start_ai_timer(delay: float) -> void:
+	if state != GameState.PLAYING:
+		EventBus.publish(AiThinkingEvent.new(false))
+		return
+	ai_timer.start(delay)
 
 
 func _do_ai_move() -> void:
-	var best := _find_best_move()
+	if state != GameState.PLAYING:
+		EventBus.publish(AiThinkingEvent.new(false))
+		return
+	var difficulty: int = SettingsManager.get_value("gameplay/difficulty", 1) as int
+	var max_depth: int
+	var random_chance: float
+	match difficulty:
+		EASY:
+			max_depth = 1
+			random_chance = 0.8
+		MEDIUM:
+			max_depth = 4
+			random_chance = 0.15
+		HARD:
+			max_depth = 9
+			random_chance = 0.0
+		_:
+			max_depth = 9
+			random_chance = 0.0
+	var best := _find_best_move(max_depth, random_chance)
 	if best >= 0:
 		place_mark(best)
+	EventBus.publish(AiThinkingEvent.new(false))
 
 
-func _find_best_move() -> int:
+func _find_best_move(max_depth: int, random_chance: float) -> int:
 	if move_count == 0:
 		return 4
 
-	var best_score: float = -INF
+	var best_score: int = -INF_SCORE
 	var best_index := -1
 	for i in 9:
 		if board[i] == -1:
 			board[i] = ai_player
-			var score := _minimax(false, 0)
+			var score := _minimax(false, 1, -INF_SCORE, INF_SCORE, max_depth, random_chance)
 			board[i] = -1
 			if score > best_score:
 				best_score = score
 				best_index = i
+	if best_index == -1:
+		return _pick_random_empty()
 	return best_index
 
 
-func _minimax(is_maximizing: bool, depth: int) -> int:
+func _pick_random_empty() -> int:
+	var empties: Array[int] = []
+	for i in 9:
+		if board[i] == -1:
+			empties.append(i)
+	if empties.is_empty():
+		return -1
+	return empties[randi() % empties.size()]
+
+
+func _minimax(is_maximizing: bool, depth: int, alpha: int, beta: int, max_depth: int, random_chance: float) -> int:
 	var winner := _check_winner()
 	if winner != -1:
-		return 10 - depth if winner == ai_player else depth - 10
+		return INF_SCORE - depth if winner == ai_player else depth - INF_SCORE
 	if _is_board_full():
+		return 0
+	if depth >= max_depth:
+		return _evaluate()
+
+	if random_chance > 0.0 and randf() < random_chance:
 		return 0
 
 	if is_maximizing:
-		var best: float = -INF
+		var best: int = -INF_SCORE
 		for i in 9:
 			if board[i] == -1:
 				board[i] = ai_player
-				best = max(best, _minimax(false, depth + 1))
+				var score: int = _minimax(false, depth + 1, alpha, beta, max_depth, random_chance)
 				board[i] = -1
-		return int(best)
+				best = max(best, score)
+				alpha = max(alpha, best)
+				if beta <= alpha:
+					return best
+		return best
 	else:
-		var best: float = INF
+		var best: int = INF_SCORE
 		var opponent := Player.X if ai_player == Player.O else Player.O
 		for i in 9:
 			if board[i] == -1:
 				board[i] = opponent
-				best = min(best, _minimax(true, depth + 1))
+				var score: int = _minimax(true, depth + 1, alpha, beta, max_depth, random_chance)
 				board[i] = -1
-		return int(best)
+				best = min(best, score)
+				beta = min(beta, best)
+				if beta <= alpha:
+					return best
+		return best
+
+
+func _evaluate() -> int:
+	var ai_score: int = 0
+	var opp_score: int = 0
+	var opponent := Player.X if ai_player == Player.O else Player.O
+	for line in WIN_LINES:
+		var ai_count: int = 0
+		var opp_count: int = 0
+		for idx in line:
+			if board[idx] == ai_player:
+				ai_count += 1
+			elif board[idx] == opponent:
+				opp_count += 1
+		if opp_count == 0:
+			ai_score += ai_count * ai_count
+		if ai_count == 0:
+			opp_score += opp_count * opp_count
+	return ai_score - opp_score
 
 
 # --- EventBus handlers ---
