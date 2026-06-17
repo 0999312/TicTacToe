@@ -74,6 +74,6 @@ This is a brownfield polish phase for an already-functional Tic-Tac-Toe game bui
 
 | Phase | Plans Complete | Status | Completed |
 |-------|----------------|--------|-----------|
-| 0. Foundation, Sound & Localization | 3/3 | Complete   | 2026-06-17 |
+| 0. Foundation, Sound & Localization | 3/3 | Complete    | 2026-06-17 |
 | 1. UI & Animations | 0/0 | Not started | - |
 | 2. AI | 0/0 | Not started | - |

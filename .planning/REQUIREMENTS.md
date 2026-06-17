@@ -45,10 +45,10 @@ Requirements for the polish milestone. Each maps to roadmap phases.
 
 ### Localization
 
-- [ ] **L10N-01**: Chinese and English translation files (JSON format, ASCII-only key ID)
+- [x] **L10N-01**: Chinese and English translation files (JSON format, ASCII-only key ID)
 - [x] **L10N-02**: CJK font fallback support (Noto Sans SC or equivalent)
-- [ ] **L10N-03**: In-game language switch (settings panel), takes effect in real-time
-- [ ] **L10N-04**: All UI text uses `tr()` function for automatic translation
+- [x] **L10N-03**: In-game language switch (settings panel), takes effect in real-time
+- [x] **L10N-04**: All UI text uses `tr()` function for automatic translation
 
 ### Code Quality
 
@@ -95,10 +95,10 @@ Which phases cover which requirements. Updated during roadmap creation.
 | SND-02 | Phase 0 | Complete |
 | SND-03 | Phase 0 | Complete |
 | SND-04 | Phase 0 | Complete |
-| L10N-01 | Phase 0 | Pending |
+| L10N-01 | Phase 0 | Complete |
 | L10N-02 | Phase 0 | Complete |
-| L10N-03 | Phase 0 | Pending |
-| L10N-04 | Phase 0 | Pending |
+| L10N-03 | Phase 0 | Complete |
+| L10N-04 | Phase 0 | Complete |
 | UI-01 | Phase 1 | Pending |
 | UI-02 | Phase 1 | Pending |
 | UI-03 | Phase 1 | Pending |
