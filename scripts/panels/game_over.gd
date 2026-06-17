@@ -1,10 +1,10 @@
 extends UIPanel
 
 
-@onready var result_label: Label = %ResultLabel
-@onready var score_label: Label = %ScoreLabel
-@onready var play_again_button: Button = %PlayAgainButton
-@onready var menu_button: Button = %MenuButton
+@onready var result_label: Label = $VBoxContainer/ResultLabel
+@onready var score_label: Label = $VBoxContainer/ScoreLabel
+@onready var play_again_button: Button = $VBoxContainer/HBoxContainer/PlayAgainButton
+@onready var menu_button: Button = $VBoxContainer/HBoxContainer/MenuButton
 
 
 func _on_init() -> void:

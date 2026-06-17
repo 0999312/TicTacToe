@@ -1,9 +1,9 @@
 extends UIPanel
 
 
-@onready var resume_button: Button = %ResumeButton
-@onready var settings_button: Button = %SettingsButton
-@onready var menu_button: Button = %MenuButton
+@onready var resume_button: Button = $VBoxContainer/ResumeButton
+@onready var settings_button: Button = $VBoxContainer/SettingsButton
+@onready var menu_button: Button = $VBoxContainer/MenuButton
 
 const UIHelpers := preload("res://scripts/utils/ui_helpers.gd")
 

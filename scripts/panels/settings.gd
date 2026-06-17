@@ -1,16 +1,16 @@
 extends UIPanel
 
 
-@onready var back_button: Button = %BackButton
-@onready var tab_container: TabContainer = %TabContainer
-@onready var sfx_slider: HSlider = %SFXSlider
-@onready var music_slider: HSlider = %MusicSlider
-@onready var sfx_value_label: Label = %SFXValueLabel
-@onready var music_value_label: Label = %MusicValueLabel
-@onready var easy_button: Button = %EasyButton
-@onready var medium_button: Button = %MediumButton
-@onready var hard_button: Button = %HardButton
-@onready var language_option_button: OptionButton = %LanguageOptionButton
+@onready var back_button: Button = $VBoxContainer/TopBar/BackButton
+@onready var tab_container: TabContainer = $VBoxContainer/TabContainer
+@onready var sfx_slider: HSlider = $VBoxContainer/TabContainer/AudioTab/AudioVBox/SFXRow/SFXSlider
+@onready var music_slider: HSlider = $VBoxContainer/TabContainer/AudioTab/AudioVBox/MusicRow/MusicSlider
+@onready var sfx_value_label: Label = $VBoxContainer/TabContainer/AudioTab/AudioVBox/SFXRow/SFXValueLabel
+@onready var music_value_label: Label = $VBoxContainer/TabContainer/AudioTab/AudioVBox/MusicRow/MusicValueLabel
+@onready var easy_button: Button = $VBoxContainer/TabContainer/GameTab/GameVBox/DifficultyRow/EasyButton
+@onready var medium_button: Button = $VBoxContainer/TabContainer/GameTab/GameVBox/DifficultyRow/MediumButton
+@onready var hard_button: Button = $VBoxContainer/TabContainer/GameTab/GameVBox/DifficultyRow/HardButton
+@onready var language_option_button: OptionButton = $VBoxContainer/TabContainer/LanguageTab/LangVBox/LanguageOptionButton
 
 const UIHelpers := preload("res://scripts/utils/ui_helpers.gd")
 const ACCENT_COLOR: Color = Color(0.91, 0.72, 0.29, 1)

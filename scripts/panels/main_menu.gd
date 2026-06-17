@@ -1,13 +1,13 @@
 extends UIPanel
 
 
-@onready var title_label: Label = %TitleLabel
-@onready var subtitle_label: Label = %SubtitleLabel
-@onready var pvp_button: Button = %PvPButton
-@onready var pvai_button: Button = %PvAIButton
-@onready var settings_button: Button = %SettingsButton
-@onready var quit_button: Button = %QuitButton
-@onready var version_label: Label = %VersionLabel
+@onready var title_label: Label = $VBoxContainer/TitleLabel
+@onready var subtitle_label: Label = $VBoxContainer/SubtitleLabel
+@onready var pvp_button: Button = $VBoxContainer/PvPButton
+@onready var pvai_button: Button = $VBoxContainer/PvAIButton
+@onready var settings_button: Button = $VBoxContainer/SettingsButton
+@onready var quit_button: Button = $VBoxContainer/QuitButton
+@onready var version_label: Label = $VBoxContainer/VersionLabel
 
 
 func _on_init() -> void:

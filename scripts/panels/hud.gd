@@ -1,11 +1,11 @@
 extends UIPanel
 
 
-@onready var mode_label: Label = %ModeLabel
-@onready var turn_label: Label = %TurnLabel
-@onready var x_wins_label: Label = %XWinsLabel
-@onready var o_wins_label: Label = %OWinsLabel
-@onready var draws_label: Label = %DrawsLabel
+@onready var mode_label: Label = $VBoxContainer/ModeLabel
+@onready var turn_label: Label = $VBoxContainer/HBoxContainer/CenterVBox/TurnLabel
+@onready var x_wins_label: Label = $VBoxContainer/HBoxContainer/LeftVBox/XWinsLabel
+@onready var o_wins_label: Label = $VBoxContainer/HBoxContainer/RightVBox/OWinsLabel
+@onready var draws_label: Label = $VBoxContainer/HBoxContainer/RightVBox/DrawsLabel
 
 
 func _on_init() -> void:
