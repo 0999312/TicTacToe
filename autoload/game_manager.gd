@@ -82,8 +82,6 @@ func place_mark(cell_index: int) -> bool:
 		return false
 	if state != GameState.PLAYING:
 		return false
-	if mode == GameMode.PVAI and current_player == ai_player:
-		return false
 	if board[cell_index] != -1:
 		return false
 	board[cell_index] = current_player

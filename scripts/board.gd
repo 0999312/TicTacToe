@@ -180,6 +180,8 @@ func _make_joy_button(btn: JoyButton) -> GUIDEInputJoyButton:
 func _on_place_mark() -> void:
 	if GameManager.state != GameManager.GameState.PLAYING:
 		return
+	if GameManager.mode == GameManager.GameMode.PVAI and GameManager.current_player == GameManager.ai_player:
+		return
 	var cell_idx := GameManager.cursor_index
 	if _is_mouse_or_touch_active():
 		var mouse_global: Vector2 = get_global_mouse_position()
