@@ -38,6 +38,7 @@ func _ready() -> void:
 
 
 func _init_board() -> void:
+	ai_timer.stop()
 	board.clear()
 	for _i in 9:
 		board.append(-1)
@@ -80,6 +81,8 @@ func place_mark(cell_index: int) -> bool:
 		push_warning("GameManager.place_mark: cell_index %d out of range [0-8]" % cell_index)
 		return false
 	if state != GameState.PLAYING:
+		return false
+	if mode == GameMode.PVAI and current_player == ai_player:
 		return false
 	if board[cell_index] != -1:
 		return false
